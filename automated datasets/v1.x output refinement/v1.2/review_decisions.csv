@@ -1,0 +1,15 @@
+item_1,"{
+  ""item_id"": ""item_1"",
+  ""decision"": ""ACCEPT"",
+  ""failure_layer"": ""NONE""
+}
+
+
+In the question, there is exactly one correct answer (Inventory turnover rate) and it is correctly answerable from general supply chain knowledge. The options do not have any internal contradiction or ambiguity. Also, the rationale for the correct answer matches with its stem perfectly. Therefore, the decision is ""ACCEPT"". There are no other issues that need to be addressed by revising or rejecting the item.
+
+
+"
+item_2,"{
+  ""item_id"": ""SCF_INVKPIs_Q1"",
+  ""decision"": ""ACCEPT"",
+ <｜begin▁of▁sentence｜>""failure_layer"": ""HARD"","
