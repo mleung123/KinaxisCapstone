@@ -1,0 +1,54 @@
+run_id,item_id,item_id_field,question,option_a,option_b,option_c,option_d,correct_key,rationale,objective_tag,difficulty_tag,gen_parse_ok,gen_raw
+20260201_125118,item_1,1,What is the formula for calculating inventory turnover?,Inventory Turnover = (Cost of Goods Sold / Purchases Cost) * 365,Inventory Turnover = (Inventory Value Change / Total Cost) * 365,Inventory Turnover = (Quantity on Hand / Quantity Ordered) * 30,Inventory Turnover = (Cost of Goods Sold / Purchases Cost) * Days in a Year,A,"The formula for calculating inventory turnover is derived from the total number of transactions divided by the average transaction rate. It gives us the average number of days it takes to sell all goods on hand, which can be used as an indicator of supply and demand dynamics in a business.","Inventory Management, Supply Chain Performance",Application,True,"Item ID: 1
+Question: What is the formula for calculating inventory turnover?
+A) Inventory Turnover = (Cost of Goods Sold / Purchases Cost) * 365
+B) Inventory Turnover = (Inventory Value Change / Total Cost) * 365
+C) Inventory Turnover = (Quantity on Hand / Quantity Ordered) * 30
+D) Inventory Turnover = (Cost of Goods Sold / Purchases Cost) * Days in a Year
+Correct Answer: A
+Rationale: The formula for calculating inventory turnover is derived from the total number of transactions divided by the average transaction rate. It gives us the average number of days it takes to sell all goods on hand, which can be used as an indicator of supply and demand dynamics in a business.
+Objective Tag: Inventory Management, Supply Chain Performance
+Difficulty: Application"
+20260201_125118,item_2,SCF_Q1,What is the key difference between Inventory Turnover Rate (ITR) and Days of Supply?,"ITR measures how quickly items are sold, while Days of Supply measures how long supply lasts.","ITR considers only the quantity of goods in inventory, while Days of Supply also considers the cost of holding inventory.",Both ITR and Days of Supply consider both the quantity of goods and their distribution across time.,Neither ITR nor Days of Supply are measures related to supply chain performance but rather they are financial metrics.,A,"The correct answer is A because ITR measures how quickly items are sold (how often inventory is sold), while Days of Supply measures the total number of business days in which goods can be supplied from a stock. Both concepts serve different purposes and are not interchangeable.",Application,Application,True,"Item ID: SCF_Q1
+
+Question: What is the key difference between Inventory Turnover Rate (ITR) and Days of Supply?
+
+A) ITR measures how quickly items are sold, while Days of Supply measures how long supply lasts.
+B) ITR considers only the quantity of goods in inventory, while Days of Supply also considers the cost of holding inventory.
+C) Both ITR and Days of Supply consider both the quantity of goods and their distribution across time.
+D) Neither ITR nor Days of Supply are measures related to supply chain performance but rather they are financial metrics.
+
+Correct Answer: A
+Rationale: The correct answer is A because ITR measures how quickly items are sold (how often inventory is sold), while Days of Supply measures the total number of business days in which goods can be supplied from a stock. Both concepts serve different purposes and are not interchangeable.
+Objective Tag: Application
+Difficulty: Application"
+20260201_125118,item_3,SCF_INVKPI_1,Which of the following metrics can be used to measure the performance of an inventory management system?,Inventory turnover,Days of supply,Reorder point,Safety stock,,"The higher the inventory turnover, the better the efficiency of the inventory management system.",Supply Chain_Fundamentals-Inventory_and_KPIs,Application,False,"Item ID: SCF_INVKPI_1
+Question: Which of the following metrics can be used to measure the performance of an inventory management system?
+A) Inventory turnover
+B) Days of supply
+C) Reorder point
+D) Safety stock
+Correct Answer: A) Inventory turnover
+Rationale: The higher the inventory turnover, the better the efficiency of the inventory management system.
+Objective Tag: Supply Chain_Fundamentals-Inventory_and_KPIs
+Difficulty: Application"
+20260201_125118,item_4,1,What is the key metric used to measure the performance of an inventory system?,Inventory turnover,Days of supply,Reorder point,Safety stock,,The inventory turnover rate measures how quickly goods are sold and replaced. It is a key performance indicator for an inventory system.,Application,Application,False,"Item ID: 1
+Question: What is the key metric used to measure the performance of an inventory system?
+A) Inventory turnover
+B) Days of supply
+C) Reorder point
+D) Safety stock
+Correct Answer: A) Inventory turnover
+Rationale: The inventory turnover rate measures how quickly goods are sold and replaced. It is a key performance indicator for an inventory system.
+Objective Tag: Application
+Difficulty: Application"
+20260201_125118,item_5,SCF_Q1,Which of the following statements correctly describes how Inventory Turnover affects Supply Chain Performance?,Increasing Inventory Turnover increases cost but reduces time to deliver goods.,Decreasing Inventory Turnover decreases cost but increases time to deliver goods.,Neither increasing nor decreasing Inventory Turnover affects cost or delivery time directly.,Both increasing and decreasing Inventory Turnover affect both cost and delivery time equally.,B,"Decreasing inventory turnover decreases the number of days it takes to deliver goods, but this does not necessarily mean a lower cost. Therefore, option B is the correct answer.",Inventory_and_KPIs,Application,True,"Item ID: SCF_Q1
+Question: Which of the following statements correctly describes how Inventory Turnover affects Supply Chain Performance?
+A) Increasing Inventory Turnover increases cost but reduces time to deliver goods.
+B) Decreasing Inventory Turnover decreases cost but increases time to deliver goods.
+C) Neither increasing nor decreasing Inventory Turnover affects cost or delivery time directly.
+D) Both increasing and decreasing Inventory Turnover affect both cost and delivery time equally.
+Correct Answer: B
+Rationale: Decreasing inventory turnover decreases the number of days it takes to deliver goods, but this does not necessarily mean a lower cost. Therefore, option B is the correct answer.
+Objective Tag: Inventory_and_KPIs
+Difficulty: Application"
