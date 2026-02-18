@@ -1,0 +1,25 @@
+Domain: Supply Chain Fundamentals – Inventory and KPIs
+
+Learning Objective:
+Apply basic inventory metrics and replenishment logic to evaluate supply chain performance.
+
+Difficulty: Application
+
+Generate one multiple-choice exam question related to at least one of the following:
+- inventory turnover
+- days of supply
+- reorder point
+- safety stock
+
+Use the following output format exactly:
+
+Item ID:
+Question:
+A)
+B)
+C)
+D)
+Correct Answer:
+Rationale:
+Objective Tag:
+Difficulty:

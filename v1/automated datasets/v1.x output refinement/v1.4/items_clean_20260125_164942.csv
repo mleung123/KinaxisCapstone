@@ -1,0 +1,51 @@
+run_id,item_id,item_id_field,question,option_a,option_b,option_c,option_d,correct_key,rationale,objective_tag,difficulty_tag,gen_parse_ok,gen_raw
+20260125_164942,item_1,1,What is the key metric used to measure the efficiency of an inventory management system?,Inventory Turnover Rate,Days of Supply,Reorder Point,Safety Stock,,The Inventory Turnover Rate measures how quickly products are sold and replaced. It is a key performance indicator (KPI) in supply chain management.,Application,Application,False,"Item ID: 1
+Question: What is the key metric used to measure the efficiency of an inventory management system?
+A) Inventory Turnover Rate
+B) Days of Supply
+C) Reorder Point
+D) Safety Stock
+Correct Answer: A) Inventory Turnover Rate
+Rationale: The Inventory Turnover Rate measures how quickly products are sold and replaced. It is a key performance indicator (KPI) in supply chain management.
+Objective Tag: Application
+Difficulty: Application"
+20260125_164942,item_2,SCF-1,What is the optimal number of days for an average customer to shop before considering replenishing inventory?,7 days,14 days,28 days,None of the above,,"The longer the lead time, the more likely customers are to make repeat purchases. Therefore, a shorter lead time is better for inventory management.",Application,Application,False,"Item ID: SCF-1
+Question: What is the optimal number of days for an average customer to shop before considering replenishing inventory?
+A) 7 days
+B) 14 days
+C) 28 days
+D) None of the above
+Correct Answer: B) 14 days
+Rationale: The longer the lead time, the more likely customers are to make repeat purchases. Therefore, a shorter lead time is better for inventory management.
+Objective Tag: Application
+Difficulty: Application"
+20260125_164942,item_3,1,Which of the following metrics can be used as a measure of supply chain performance?,Inventory turnover,Days of supply,Reorder point,Safety stock,,The days of supply is a metric that measures how long an item can be supplied before it goes out of business. It's typically calculated by dividing the total cost of goods sold (COGS) by the average inventory turnover rate.,Application,Application,False,"Item ID: 1
+Question: Which of the following metrics can be used as a measure of supply chain performance?
+A) Inventory turnover
+B) Days of supply
+C) Reorder point
+D) Safety stock
+Correct Answer: B) Days of supply
+Rationale: The days of supply is a metric that measures how long an item can be supplied before it goes out of business. It's typically calculated by dividing the total cost of goods sold (COGS) by the average inventory turnover rate.
+Objective Tag: Application
+Difficulty: Application"
+20260125_164942,item_4,SCF_INV1,What metric can be used to evaluate the performance of an inventory management system?,Inventory turnover,Days of supply,Reorder point,Safety stock,,The number of days a product is in demand provides insight into how well the company can meet customer demand.,Application,Application,False,"Item ID: SCF_INV1
+Question: What metric can be used to evaluate the performance of an inventory management system?
+A) Inventory turnover
+B) Days of supply
+C) Reorder point
+D) Safety stock
+Correct Answer: B) Days of supply
+Rationale: The number of days a product is in demand provides insight into how well the company can meet customer demand.
+Objective Tag: Application
+Difficulty: Application"
+20260125_164942,item_5,1,What does safety stock refer to in terms of inventory management?,The number of days that an item can be out of stock before reordering.,The minimum quantity of an item required at all times.,The maximum quantity of an item allowed on hand.,None of the above.,B,"Safety stock is a buffer level that ensures there's always enough inventory to cover unexpected shortages, regardless of the reorder point or lead time.",Inventory Management KPIs,Application,True,"Item ID: 1
+Question: What does safety stock refer to in terms of inventory management?
+A) The number of days that an item can be out of stock before reordering.
+B) The minimum quantity of an item required at all times.
+C) The maximum quantity of an item allowed on hand.
+D) None of the above.
+Correct Answer: B
+Rationale: Safety stock is a buffer level that ensures there's always enough inventory to cover unexpected shortages, regardless of the reorder point or lead time.
+Objective Tag: Inventory Management KPIs
+Difficulty: Application"

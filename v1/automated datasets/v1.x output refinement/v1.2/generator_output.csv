@@ -1,0 +1,89 @@
+item_1,"Item ID: 1
+
+Question: What is the primary purpose of a Safety Stock in inventory management?
+
+A) To ensure regular replenishment of items to prevent stockouts.
+B) To reduce holding costs by removing unneeded inventory from storage.
+C) To increase demand for products by ensuring that the business has enough inventory to meet current and future demands.
+D) None of the above.
+
+Correct Answer: C
+Rationale: Safety Stock is a measure used in inventory control to ensure that there's always enough stock available to meet future demand, even if short-term fluctuations in orders are not predictable or unknown. It does not aim to reduce holding costs by removing unneeded inventory from storage but rather provides a cushion for sudden large demands.
+Objective Tag: Application
+Difficulty Level: Application
+
+
+"
+item_1,"Item ID: 12345
+
+Question: What is the key difference between Inventory Turnover and Days of Supply?
+A) Increasing with increasing inventory levels.
+B) Decreasing with increasing inventory levels.
+C) Neither, they are equal at all times.
+D) None of the above.
+Correct Answer: B) 
+Rationale: Inventory turnover measures how quickly an item goes out of stock and is replaced by new items. It's influenced by changes in inventory levels. On the other hand, days of supply measures for how long a certain amount of inventory will be held before it needs to be replenished. 
+Objective Tag: Inventory Management 
+Difficulty: Application
+
+NOTE: This question is related to Supply Chain Fundamentals - Inventory and KPIs domain which falls under the Objective tag. It's also an application difficulty level question as it requires understanding of basic inventory metrics and replenishment logic.
+"
+item_1,"Sure, here's a question related to ""reorder point"":
+
+---
+**Item ID:** 1.2
+
+**Question:** What is the reorder point in inventory management? Explain its role.
+
+A) The reorder point refers to the number of items that should be kept on hand so that we can cover a certain number of days of demand without running out of stock.
+
+B) The reorder point represents the lowest quantity at which an item must be restocked to maintain operational efficiency.
+
+C) The reorder point is typically determined by examining historical sales data and predicting future demands.
+
+D) The reorder point is a time period during which the inventory should be kept low to ensure smooth running of business operations.
+
+**Correct Answer:** D
+
+**Rationale:** Incorrect options do not accurately represent the role of the reorder point in inventory management. It's true that it can provide some buffer against potential future demand, but it is typically determined based on historical sales data and predicting future demands rather than being a fixed number to cover a certain number of days of demand without running out.
+
+**Objective Tag:** Inventory Management
+
+**Difficulty:** Application
+---
+
+I hope this meets your requirements. If you have any other questions, feel free to ask.
+"
+item_1,"Sure, here is a multiple-choice exam question related to inventory turnover and KPIs:
+
+Item ID: 1
+Question: What metric measures the frequency of restocking in a supply chain?
+A) Inventory turnover rate
+B) Days of Supply
+C) Reorder point
+D) Safety stock
+Correct Answer: A) Inventory turnover rate
+Rationale: The inventory turnover rate is often used as a KPI to measure the number of items sold per unit time. It measures how quickly inventory levels are being replenished and can provide insights into the efficiency of the supply chain.
+Objective Tag: Application
+Difficulty: Application
+
+Note: This question uses one of the options provided, but it's not limited to these choices. The correct answer could be any one of them based on the context or specific topic related to inventory turnover and KPIs in a supply chain.
+"
+item_2,"Sure, here is a multiple-choice exam question related to inventory turnover in the context of supply chain performance. 
+
+Item ID: SCF_INVKPIs_Q1
+Question: What is the key difference between Inventory Turnover Rate (ITR) and Days of Supply?
+A) ITR measures average quantity sold per day, while Dos measures average inventory level.
+B) ITR considers time period, but Dos does not.
+C) Both measure average inventory levels, but they are used in different scenarios.
+D) Neither measures average quantity sold per day, and neither measures average inventory levels.
+Correct Answer: A
+Rationale: The key difference between these two metrics is that ITR considers the time period (the number of days), while Dos does not. Hence, ITR measures average quantity sold per day, while Dos measures average inventory level.
+Objective Tag: Recall, Application
+Difficulty: Application
+
+This question tests understanding of key concepts related to Inventory and KPIs in supply chain fundamentals. 
+Answer A is the correct option because ITR measures average quantity sold per day while Dos measures average inventory level.
+
+Please note that this question does not include all possible answer options, only those which would be consistent with the provided context. The other two incorrect answers are deduced based on logic from the given options or commonly recognized concepts related to Inventory and KPIs in supply chain fundamentals.
+"

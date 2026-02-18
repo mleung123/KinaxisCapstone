@@ -1,0 +1,34 @@
+Evaluate the following exam item.
+
+Output ONLY this JSON object.
+Do NOT include prose, markdown, explanations, or additional keys.
+
+{
+  "item_id": "{item_id}",
+  "decision": "ACCEPT|REVISE|REJECT",
+  "failure_layer": "HARD|REPAIRABLE|NONE",
+  "reason_codes": [],
+  "revision_instructions": []
+}
+
+Apply these checks IN ORDER:
+
+1) Hard constraints:
+- Exactly one correct answer
+- Answerable from general supply chain knowledge
+- No ambiguity or internal contradiction
+- Correct answer, stem, and rationale are internally consistent
+
+2) Repairable defects:
+- Weak or implausible distractors
+- Objective mismatch
+- Excessive wording
+- Minor numeric or unit errors
+
+3) Compliance:
+- Neutral wording
+- Balanced options
+- No trick patterns
+
+ITEM:
+{exam_item}
