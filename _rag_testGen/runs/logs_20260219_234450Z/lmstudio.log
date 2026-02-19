@@ -461,3 +461,15 @@
 [2026-02-18 14:38:22.421] [error] (node:59428) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
 (Use `LM Studio --trace-deprecation ...` to show where the warning was created)
 [2026-02-18 14:45:37.893] [error] (node:59428) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+[2026-02-19 09:06:30.870] [info]  Hardware survey for general system resources through 'vulkan' took 931.97ms
+[2026-02-19 09:06:31.305] [info]  App starting...
+[2026-02-19 09:06:31.307] [info]  [AppUpdater] Feed base: https://updates.lmstudio.ai, channel: stable
+[2026-02-19 09:06:31.308] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-19 09:06:31.309] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-19 09:06:31.310] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-19 09:06:31.844] [info]  [AppUpdater] Received version info response
+[2026-02-19 09:06:31.845] [info]  [AppUpdater] Current version: 0.4.2 (build: 2), new version: 0.4.2 (build: 2)
+[2026-02-19 09:06:31.846] [info]  No update available: 0.4.2 (build: 2) <= 0.4.2 (build: 2)
+[2026-02-19 09:06:31.847] [info]  AppUpdater state changed to idle
+[2026-02-19 09:29:15.127] [error] (node:15920) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `LM Studio --trace-warnings ...` to show where the warning was created)

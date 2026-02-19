@@ -23,9 +23,9 @@ def _truncate(s: str, limit: int) -> str:
     return s if len(s) <= limit else (s[:limit] + "...<truncated>")
 
 
-def _http_log_path() -> Path | None:
+def _http_logpath() -> Path | None:
     """note: Resolves where to write LM Studio request-level logs; returns None if disabled."""
-    explicit = (os.environ.get("LMSTUDIO_HTTP_LOG_PATH") or "").strip()
+    explicit = (os.environ.get("LMSTUDIO_HTTP_LOGPATH") or "").strip()
     if explicit:
         return Path(explicit)
 
@@ -38,7 +38,7 @@ def _http_log_path() -> Path | None:
 
 def _append_http_log(record: dict[str, Any]) -> None:
     """note: Appends one JSONL record to the request-level log if logging is enabled."""
-    path = _http_log_path()
+    path = _http_logpath()
     if path is None:
         return
     try:

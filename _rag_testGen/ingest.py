@@ -7,7 +7,7 @@ from typing import Any, Iterable, List
 import psycopg
 
 from chunking import chunk_text
-from db_pgvector import clear_chunks, ensure_schema, set_meta_if_absent, upsert_chunks
+from db_pgvector import clear_chunks, ensure_schema, set_meta_if_absent, set_meta, upsert_chunks
 from embed_lmstudio import EmbedConfig, embed_texts
 from loaders import load_document
 
@@ -67,9 +67,10 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
 
     with psycopg.connect(cfg.db_dsn) as conn:
         ensure_schema(conn, int(embedding_dim))
-        set_meta_if_absent(conn, "embedding_dim", str(int(embedding_dim)))
-        set_meta_if_absent(conn, "embed_model", str(cfg.embed_model))
-        set_meta_if_absent(conn, "source_root", str(domain_dir))
+        _set_meta = set_meta if cfg.clear_first else set_meta_if_absent
+        _set_meta(conn, "embedding_dim", str(int(embedding_dim)))
+        _set_meta(conn, "embed_model", str(cfg.embed_model))
+        _set_meta(conn, "source_root", str(domain_dir))
 
         if cfg.clear_first:
             cleared = clear_chunks(conn)

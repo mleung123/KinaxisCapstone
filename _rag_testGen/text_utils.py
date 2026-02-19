@@ -67,13 +67,13 @@ def validate_generator_schema(gen_text: str) -> tuple[bool, list[str]]:
     t = gen_text or ""
     violations: list[str] = []
 
-    required_labels = ["question:", "a)", "b)", "c)", "d)", "correct_key:", "difficulty:"]
+    required_labels = ["question:", "a)", "b)", "c)", "d)", "correct_key:", "correct key:", "difficulty:"]
     lower = t.lower()
     for lab in required_labels:
         if lab not in lower:
             violations.append(f"missing_{lab.replace(':','').replace(')','')}")
     # validate correct key
-    m = re.search(r"correct_key\s*:\s*([A-Da-d])", t)
+    m = re.search(r"correct[_ ]key\s*:\s*([A-Da-d])", t, flags=re.IGNORECASE)
     if not m:
         violations.append("bad_correct_key")
     # validate difficulty tag
@@ -93,5 +93,5 @@ def enforce_hygiene_on_review(review_json: dict[str, Any] | None) -> dict[str, A
     out["failure_layer"] = str(review_json.get("failure_layer", "") or "")
     out["reason_codes"] = review_json.get("reason_codes", [])
     out["revision_instructions"] = str(review_json.get("revision_instructions", "") or "")
-    out["reviewer_parse_ok"] = bool(review_json.get("reviewer_parse_ok", False))
+    out["reviewer_parse_ok"] = bool(review_json.get("decision", ""))
     return out

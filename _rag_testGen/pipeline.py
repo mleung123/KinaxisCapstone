@@ -3,24 +3,29 @@ from __future__ import annotations
 import json
 import os
 import time
+import psycopg
+import sys
+
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
-
-import psycopg
 from openpyxl import Workbook
+
+from embed_lmstudio import EmbedConfig, embed_texts
+from ingest import IngestConfig, ingest_domain
+from lmstudio_client import call_llm
 
 from db_pgvector import (
     chunks_rowcount,
     clear_chunks,
     ensure_schema,
+    get_db_snapshot_per_doc,
+    get_db_snapshot_summary,
     get_random_chunks,
     similarity_search,
 )
-from embed_lmstudio import EmbedConfig, embed_texts
-from ingest import IngestConfig, ingest_domain
-from lmstudio_client import call_llm
+
 from text_utils import (
     clean_generator_text,
     enforce_hygiene_on_review,
@@ -64,7 +69,7 @@ class PipelineConfig:
     domain_dir: Path
     lm_url: str
     embed_model: str
-    embedding_dim: int
+    embedding_dim: int | None = None
     batch_size: int = 32
     chunk_chars: int = 1600
     overlap_chars: int = 200
@@ -106,7 +111,7 @@ def _parse_item_fields(gen_text: str) -> dict[str, str]:
                 val = ln.split(")", 1)[1].strip() if ")" in ln else ""
                 break
         out[opt[0]] = val
-    out["correct_key"] = _grab_after("correct_key").upper()
+    out["correct_key"] = _grab_after("correct_key") or _grab_after("correct key")
     out["difficulty"] = _grab_after("difficulty").lower()
     return out
 
@@ -125,6 +130,8 @@ def write_run_xlsx(
     decisions_rows: list[dict[str, Any]],
     trace_rows: list[dict[str, Any]],
     metadata: dict[str, Any],
+    db_snapshot_summary: dict[str, Any] | None = None,
+    db_snapshot_per_doc: list[dict[str, Any]] | None = None,
 ) -> Path:
     """note: Creates a single XLSX per run with normalized sheets and returns the written path."""
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -135,79 +142,43 @@ def write_run_xlsx(
     ws_items = wb.active
     ws_items.title = "Items"
     items_headers = [
-        "run_id",
-        "item_id",
-        "question",
-        "a",
-        "b",
-        "c",
-        "d",
-        "correct_key",
-        "difficulty",
-        "decision",
-        "schema_ok",
-        "schema_violations",
-        "gen_text_clean",
+        "run_id", "item_id", "question", "a", "b", "c", "d",
+        "correct_key", "difficulty", "decision", "schema_ok",
+        "schema_violations", "gen_text_clean",
     ]
     items_data: list[list[Any]] = []
     for r in items_rows:
-        items_data.append(
-            [
-                r.get("run_id"),
-                r.get("item_id"),
-                r.get("question"),
-                r.get("a"),
-                r.get("b"),
-                r.get("c"),
-                r.get("d"),
-                r.get("correct_key"),
-                r.get("difficulty"),
-                r.get("decision"),
-                r.get("schema_ok"),
-                r.get("schema_violations"),
-                r.get("gen_text_clean"),
-            ]
-        )
+        items_data.append([
+            r.get("run_id"), r.get("item_id"), r.get("question"),
+            r.get("a"), r.get("b"), r.get("c"), r.get("d"),
+            r.get("correct_key"), r.get("difficulty"), r.get("decision"),
+            r.get("schema_ok"), r.get("schema_violations"), r.get("gen_text_clean"),
+        ])
     _xlsx_write_sheet(ws_items, items_headers, items_data)
 
     ws_rev = wb.create_sheet("Reviewer Decisions")
     rev_headers = [
-        "run_id",
-        "item_id",
-        "decision",
-        "failure_layer",
-        "reason_codes",
-        "revision_instructions",
-        "reviewer_parse_ok",
+        "run_id", "item_id", "decision", "failure_layer",
+        "reason_codes", "revision_instructions", "reviewer_parse_ok",
     ]
     rev_data: list[list[Any]] = []
     for r in decisions_rows:
-        rev_data.append(
-            [
-                r.get("run_id"),
-                r.get("item_id"),
-                r.get("decision"),
-                r.get("failure_layer"),
-                json.dumps(r.get("reason_codes", []), ensure_ascii=False),
-                r.get("revision_instructions"),
-                r.get("reviewer_parse_ok"),
-            ]
-        )
+        rev_data.append([
+            r.get("run_id"), r.get("item_id"), r.get("decision"),
+            r.get("failure_layer"),
+            json.dumps(r.get("reason_codes", []), ensure_ascii=False),
+            r.get("revision_instructions"), r.get("reviewer_parse_ok"),
+        ])
     _xlsx_write_sheet(ws_rev, rev_headers, rev_data)
 
     ws_trace = wb.create_sheet("Traceability")
-    trace_headers = ["run_id", "item_id", "doc_path", "chunk_index", "distance"]
+    trace_headers = ["run_id", "item_id", "doc_path", "chunk_index", "distance", "chunk_text"]
     trace_data: list[list[Any]] = []
     for r in trace_rows:
-        trace_data.append(
-            [
-                r.get("run_id"),
-                r.get("item_id"),
-                r.get("doc_path"),
-                r.get("chunk_index"),
-                r.get("distance"),
-            ]
-        )
+        trace_data.append([
+            r.get("run_id"), r.get("item_id"), r.get("doc_path"),
+            r.get("chunk_index"), r.get("distance"), r.get("chunk_text"),
+        ])
     _xlsx_write_sheet(ws_trace, trace_headers, trace_data)
 
     ws_meta = wb.create_sheet("Run Metadata")
@@ -219,6 +190,27 @@ def write_run_xlsx(
             v = json.dumps(v, ensure_ascii=False)
         meta_rows.append([k, v])
     _xlsx_write_sheet(ws_meta, meta_headers, meta_rows)
+
+    # ---- DB Snapshot sheet ----
+    ws_snap = wb.create_sheet("DB Snapshot")
+    ws_snap.append(["--- Summary ---", ""])
+    for k, v in sorted((db_snapshot_summary or {}).items()):
+        ws_snap.append([k, ("" if v is None else v)])
+    ws_snap.append(["", ""])
+    ws_snap.append(["--- Per-Document Inventory ---", ""])
+    per_doc_headers = [
+        "doc_path", "chunk_count", "doc_sha256",
+        "first_created_at", "last_updated_at",
+    ]
+    ws_snap.append(per_doc_headers)
+    for row in (db_snapshot_per_doc or []):
+        ws_snap.append([
+            row.get("doc_path", ""),
+            row.get("chunk_count", ""),
+            row.get("doc_sha256", ""),
+            row.get("first_created_at", "") or "",
+            row.get("last_updated_at", "") or "",
+        ])
 
     wb.save(xlsx_path)
     return xlsx_path
@@ -314,6 +306,9 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
     schema_ok_count = 0
     reviewer_json_ok = 0
     decisions_count: dict[str, int] = {}
+    
+    db_snap_summary: dict[str, Any] | None = None
+    db_snap_per_doc: list[dict[str, Any]] | None = None
 
     with psycopg.connect(cfg.db_dsn) as conn:
         if chunks_rowcount(conn) <= 0:
@@ -324,6 +319,7 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
 
         for i in range(int(cfg.n_items)):
             item_id = f"item_{i+1}"
+            print(f"Currently processing... {item_id}", file=sys.stderr, flush=True)
 
             seed_rows = get_random_chunks(conn, n=1)
             seed_text = seed_rows[0]["chunk_text"]
@@ -344,6 +340,7 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
                         "doc_path": r.get("doc_path"),
                         "chunk_index": r.get("chunk_index"),
                         "distance": r.get("distance"),
+                        "chunk_text": r.get("chunk_text"),
                     }
                 )
 
@@ -414,10 +411,13 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
                     "revision_instructions": rev_clean.get("revision_instructions", ""),
                     "reviewer_parse_ok": bool(rev_clean.get("reviewer_parse_ok", False)),
                 }
-            )
+            )          
 
             if cfg.sleep_seconds:
                 time.sleep(float(cfg.sleep_seconds))
+                
+        db_snap_summary = get_db_snapshot_summary(conn)
+        db_snap_per_doc = get_db_snapshot_per_doc(conn)
 
     meta = {
         "created_at": created_at,
@@ -441,6 +441,8 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
         decisions_rows=decisions_rows,
         trace_rows=trace_rows,
         metadata=meta,
+        db_snapshot_summary=db_snap_summary,
+        db_snapshot_per_doc=db_snap_per_doc,
     )
 
     return {
@@ -463,9 +465,6 @@ def run_pipeline(cfg: PipelineConfig) -> dict[str, Any]:
     ingest_summary: dict[str, Any] | None = None
 
     with psycopg.connect(cfg.db_dsn) as conn:
-        if cfg.clear_first:
-            clear_chunks(conn)
-
         has_chunks = chunks_rowcount(conn) > 0
 
     if cfg.force_ingest or not has_chunks:
@@ -475,10 +474,11 @@ def run_pipeline(cfg: PipelineConfig) -> dict[str, Any]:
             db_dsn=cfg.db_dsn,
             embed_lm_url=cfg.lm_url,
             embed_model=cfg.embed_model,
-            embedding_dim=int(cfg.embedding_dim),
+            embedding_dim=int(cfg.embedding_dim) if cfg.embedding_dim is not None else None,
             batch_size=int(cfg.batch_size),
             chunk_chars=int(cfg.chunk_chars),
             overlap_chars=int(cfg.overlap_chars),
+            clear_first=bool(cfg.clear_first),
         )
         ingest_summary = ingest_domain(ingest_cfg)
 

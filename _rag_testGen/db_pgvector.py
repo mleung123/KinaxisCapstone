@@ -70,6 +70,19 @@ def set_meta_if_absent(conn: psycopg.Connection, key: str, value: str) -> None:
             (key, value),
         )
     conn.commit()
+    
+
+def set_meta(conn: psycopg.Connection, key: str, value: str) -> None:
+    """note: Writes a rag_meta value unconditionally, overwriting any existing value."""
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO rag_meta (k, v) VALUES (%s, %s)
+            ON CONFLICT (k) DO UPDATE SET v = EXCLUDED.v, updated_at = now();
+            """,
+            (key, value),
+        )
+    conn.commit()
 
 
 def get_meta(conn: psycopg.Connection, key: str) -> str | None:
@@ -194,3 +207,89 @@ def get_random_chunks(conn, n: int = 1):
         )
     return out
 
+
+def get_db_snapshot_summary(conn: psycopg.Connection) -> dict[str, Any]:
+    """note: Returns a flat dict of aggregate statistics over rag_chunks and all rag_meta rows for DB Snapshot sheet."""
+    from datetime import datetime, timezone
+
+    snapshot_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    summary: dict[str, Any] = {"snapshot_taken_at": snapshot_at}
+
+    # rag_meta — read all keys
+    with conn.cursor() as cur:
+        cur.execute("SELECT k, v FROM rag_meta ORDER BY k;")
+        for k, v in (cur.fetchall() or []):
+            summary[f"rag_meta.{k}"] = str(v)
+
+    # rag_chunks aggregate
+    with conn.cursor() as cur:
+        cur.execute("SELECT to_regclass('public.rag_chunks') IS NOT NULL;")
+        table_exists = bool(cur.fetchone()[0])
+
+    if not table_exists:
+        summary["chunks_total"] = 0
+        summary["distinct_docs"] = 0
+        summary["distinct_doc_sha256s"] = 0
+        summary["oldest_chunk_created_at"] = None
+        summary["newest_chunk_updated_at"] = None
+        return summary
+
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT
+                COUNT(*)                        AS chunks_total,
+                COUNT(DISTINCT doc_path)        AS distinct_docs,
+                COUNT(DISTINCT doc_sha256)      AS distinct_doc_sha256s,
+                MIN(created_at)                 AS oldest_chunk_created_at,
+                MAX(updated_at)                 AS newest_chunk_updated_at
+            FROM rag_chunks;
+            """
+        )
+        row = cur.fetchone()
+
+    if row:
+        summary["chunks_total"] = int(row[0]) if row[0] is not None else 0
+        summary["distinct_docs"] = int(row[1]) if row[1] is not None else 0
+        summary["distinct_doc_sha256s"] = int(row[2]) if row[2] is not None else 0
+        summary["oldest_chunk_created_at"] = str(row[3]) if row[3] is not None else None
+        summary["newest_chunk_updated_at"] = str(row[4]) if row[4] is not None else None
+
+    return summary
+
+
+def get_db_snapshot_per_doc(conn: psycopg.Connection) -> list[dict[str, Any]]:
+    """note: Returns one row per distinct doc_path with chunk count, sha256, and created/updated timestamps."""
+    with conn.cursor() as cur:
+        cur.execute("SELECT to_regclass('public.rag_chunks') IS NOT NULL;")
+        if not bool(cur.fetchone()[0]):
+            return []
+
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT
+                doc_path,
+                COUNT(*)                   AS chunk_count,
+                MAX(doc_sha256)            AS doc_sha256,
+                MIN(created_at)            AS first_created_at,
+                MAX(updated_at)            AS last_updated_at
+            FROM rag_chunks
+            GROUP BY doc_path
+            ORDER BY doc_path;
+            """
+        )
+        rows = cur.fetchall() or []
+
+    out: list[dict[str, Any]] = []
+    for doc_path, chunk_count, doc_sha256, first_created, last_updated in rows:
+        out.append(
+            {
+                "doc_path": str(doc_path),
+                "chunk_count": int(chunk_count),
+                "doc_sha256": str(doc_sha256),
+                "first_created_at": str(first_created) if first_created is not None else None,
+                "last_updated_at": str(last_updated) if last_updated is not None else None,
+            }
+        )
+    return out
