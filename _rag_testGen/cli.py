@@ -23,7 +23,7 @@ def build_parser() -> argparse.ArgumentParser:
     ingest_p = sub.add_parser("ingest", help="Ingest domain folder into Postgres+pgvector.")
     ingest_p.add_argument("--domain-dir", type=str, default=None)
     ingest_p.add_argument("--db-dsn", type=str, default=None)
-    ingest_p.add_argument("--lm-base-url", type=str, default=None)
+    ingest_p.add_argument("--lm-url", type=str, default=None)
     ingest_p.add_argument("--embed-model", type=str, default=None)
     ingest_p.add_argument("--embedding-dim", type=int, default=None)
     ingest_p.add_argument("--batch-size", type=int, default=None)
@@ -33,7 +33,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     gen_p = sub.add_parser("generate", help="Generate test items using existing pgvector chunks (no ingest).")
     gen_p.add_argument("--db-dsn", type=str, default=None)
-    gen_p.add_argument("--lm-base-url", type=str, default=None)
+    gen_p.add_argument("--lm-url", type=str, default=None)
     gen_p.add_argument("--embed-model", type=str, default=None)
     gen_p.add_argument("--sme-model", type=str, default=None)
     gen_p.add_argument("--review-model", type=str, default=None)
