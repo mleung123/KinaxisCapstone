@@ -1,0 +1,10 @@
+Review the following generated item.
+
+Return JSON with keys:
+decision: "ACCEPT" | "REVISE" | "REJECT"
+failure_layer: short string (optional)
+reason_codes: array of short strings (optional)
+revision_instructions: string (optional)
+
+Generated item:
+{{GEN_ITEM}}

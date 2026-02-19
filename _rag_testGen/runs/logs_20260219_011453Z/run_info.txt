@@ -1,0 +1,10 @@
+RUN_ID=20260219_011453Z 
+RAG_ROOT=C:\Users\kadek\Documents\GitHub\KinaxisCapstone\_rag_testGen 
+DOMAIN_DIR=C:\Users\kadek\Documents\GitHub\KinaxisCapstone\example1 
+DB_DSN=postgresql://postgres:postgres@localhost:5435/kinaxis_ragtestdb 
+LM_URL=http://localhost:1234 
+EMBED_MODEL=text-embedding-nomic-embed-text-v1.5@q8_0 
+SME_MODEL=Qwen2.5-7B-Instruct-Q5_K_M 
+REVIEW_MODEL=Qwen2.5-7B-Instruct-Q5_K_M 
+DOCKER_CONTAINER=pgvector17 
+LMSTUDIO_LOG_PATH=C:\Users\kadek\AppData\Roaming\LM Studio\logs\main.log 

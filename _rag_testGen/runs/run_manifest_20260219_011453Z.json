@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-02-19T01:14:55Z",
+  "config": {
+    "db_dsn_redacted": "postgresql://postgres:***@localhost:5435/kinaxis_ragtestdb",
+    "lm_url": "http://localhost:1234",
+    "embed_model": "text-embedding-nomic-embed-text-v1.5@q8_0",
+    "sme_model": "Qwen2.5-7B-Instruct-Q5_K_M",
+    "review_model": "Qwen2.5-7B-Instruct-Q5_K_M",
+    "n_items": 5,
+    "run_id": "20260219_011453Z",
+    "prompts_dir": "C:\\Users\\kadek\\Documents\\GitHub\\KinaxisCapstone\\_rag_testGen\\_prompts",
+    "out_dir": "C:\\Users\\kadek\\Documents\\GitHub\\KinaxisCapstone\\_rag_testGen\\runs",
+    "top_k": 6
+  },
+  "prompt_files": {
+    "generator_system": "generator_system.txt",
+    "generator_user": "generator_user.txt",
+    "reviewer_system": "reviewer_system.txt",
+    "reviewer_user": "reviewer_user.txt"
+  }
+}

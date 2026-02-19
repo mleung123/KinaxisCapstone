@@ -1,0 +1,226 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Any, Iterable
+
+import psycopg
+from psycopg.types.json import Json
+
+
+@dataclass(frozen=True)
+class DBConfig:
+    """note: Holds database connection configuration for Postgres + pgvector."""
+    dsn: str
+
+
+def ensure_schema(conn: psycopg.Connection, embedding_dim: int) -> None:
+    """note: Creates required tables and indexes for chunk storage and vector search."""
+    with conn.cursor() as cur:
+        cur.execute("CREATE EXTENSION IF NOT EXISTS vector;")
+
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS rag_meta (
+                k TEXT PRIMARY KEY,
+                v TEXT NOT NULL,
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+            );
+            """
+        )
+
+        cur.execute(
+            f"""
+            CREATE TABLE IF NOT EXISTS rag_chunks (
+                id BIGSERIAL PRIMARY KEY,
+                doc_path TEXT NOT NULL,
+                doc_sha256 TEXT NOT NULL,
+                chunk_index INT NOT NULL,
+                chunk_text TEXT NOT NULL,
+                embedding VECTOR({int(embedding_dim)}) NOT NULL,
+                meta JSONB NOT NULL DEFAULT '{{}}'::jsonb,
+                created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+                UNIQUE (doc_sha256, chunk_index)
+            );
+            """
+        )
+        cur.execute(
+            """
+            CREATE INDEX IF NOT EXISTS rag_chunks_doc_path_idx
+            ON rag_chunks (doc_path);
+            """
+        )
+        cur.execute(
+            """
+            CREATE INDEX IF NOT EXISTS rag_chunks_meta_gin_idx
+            ON rag_chunks USING GIN (meta);
+            """
+        )
+    conn.commit()
+
+
+def set_meta_if_absent(conn: psycopg.Connection, key: str, value: str) -> None:
+    """note: Writes a rag_meta value only if the key does not already exist."""
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO rag_meta (k, v) VALUES (%s, %s)
+            ON CONFLICT (k) DO NOTHING;
+            """,
+            (key, value),
+        )
+    conn.commit()
+
+
+def get_meta(conn: psycopg.Connection, key: str) -> str | None:
+    """note: Retrieves a rag_meta value by key (or None if missing)."""
+    with conn.cursor() as cur:
+        cur.execute("SELECT v FROM rag_meta WHERE k = %s;", (key,))
+        row = cur.fetchone()
+        return str(row[0]) if row else None
+
+
+def chunks_rowcount(conn: psycopg.Connection) -> int:
+    """note: Returns the number of stored rag_chunks rows (0 if table missing)."""
+    with conn.cursor() as cur:
+        cur.execute("SELECT to_regclass('public.rag_chunks') IS NOT NULL;")
+        exists = bool(cur.fetchone()[0])
+        if not exists:
+            return 0
+        cur.execute("SELECT COUNT(*) FROM rag_chunks;")
+        return int(cur.fetchone()[0])
+
+
+def clear_chunks(conn: psycopg.Connection) -> int:
+    """note: Deletes all rows from rag_chunks and returns the number deleted."""
+    with conn.cursor() as cur:
+        cur.execute("SELECT to_regclass('public.rag_chunks') IS NOT NULL;")
+        exists = bool(cur.fetchone()[0])
+        if not exists:
+            return 0
+        cur.execute("DELETE FROM rag_chunks;")
+        deleted = cur.rowcount if cur.rowcount is not None else 0
+    conn.commit()
+    return int(deleted)
+
+
+def _vector_literal(vec: list[float]) -> str:
+    """note: Formats a Python list[float] as a pgvector literal for safe casting."""
+    return "[" + ",".join(f"{float(x):.10g}" for x in vec) + "]"
+
+
+def upsert_chunks(
+    conn: psycopg.Connection,
+    rows: Iterable[dict[str, Any]],
+) -> int:
+    """note: Upserts chunk rows keyed by (doc_sha256, chunk_index); returns number of rows processed."""
+    sql = """
+    INSERT INTO rag_chunks (
+        doc_path, doc_sha256, chunk_index, chunk_text, embedding, meta
+    ) VALUES (
+        %(doc_path)s, %(doc_sha256)s, %(chunk_index)s, %(chunk_text)s,
+        %(embedding)s::vector, %(meta)s::jsonb
+    )
+    ON CONFLICT (doc_sha256, chunk_index)
+    DO UPDATE SET
+        doc_path = EXCLUDED.doc_path,
+        chunk_text = EXCLUDED.chunk_text,
+        embedding = EXCLUDED.embedding,
+        meta = EXCLUDED.meta,
+        updated_at = now();
+    """
+    count = 0
+    with conn.cursor() as cur:
+        for r in rows:
+            rr = dict(r)
+            rr["meta"] = Json(rr.get("meta") or {})
+            rr["embedding"] = _vector_literal(rr["embedding"])
+            cur.execute(sql, rr)
+            count += 1
+    conn.commit()
+    return count
+
+
+def get_seed_chunk_text(conn: psycopg.Connection, offset: int) -> str:
+    """note: Deterministically selects a seed chunk text using an offset modulo rowcount."""
+    total = chunks_rowcount(conn)
+    if total <= 0:
+        raise RuntimeError("No chunks available in DB. Run ingest first.")
+    use_off = int(offset) % int(total)
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT chunk_text
+            FROM rag_chunks
+            ORDER BY id
+            OFFSET %s
+            LIMIT 1;
+            """,
+            (use_off,),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise RuntimeError("Failed to fetch seed chunk text.")
+        return str(row[0])
+
+
+def similarity_search(conn: psycopg.Connection, query_embedding: list[float], top_k: int) -> list[dict[str, Any]]:
+    """note: Retrieves top-k chunks by vector distance using pgvector (<->) operator."""
+    qv = _vector_literal(query_embedding)
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT doc_path, chunk_index, chunk_text, meta, (embedding <-> %s::vector) AS distance
+            FROM rag_chunks
+            ORDER BY embedding <-> %s::vector
+            LIMIT %s;
+            """,
+            (qv, qv, int(top_k)),
+        )
+        rows = cur.fetchall() or []
+    out: list[dict[str, Any]] = []
+    for doc_path, chunk_index, chunk_text, meta, distance in rows:
+        out.append(
+            {
+                "doc_path": str(doc_path),
+                "chunk_index": int(chunk_index),
+                "chunk_text": str(chunk_text),
+                "meta": meta,
+                "distance": float(distance) if distance is not None else None,
+            }
+        )
+    return out
+
+def db_has_chunks(conn) -> bool:
+    """note: Returns True if rag_chunks exists and has at least one row."""
+    return chunks_rowcount(conn) > 0
+
+def get_random_chunks(conn, n: int = 1):
+    """note: Returns n arbitrary chunk rows for seeding generation."""
+    with conn.cursor() as cur:
+        cur.execute(
+            """
+            SELECT doc_path, chunk_index, chunk_text, meta
+            FROM rag_chunks
+            ORDER BY random()
+            LIMIT %s;
+            """,
+            (int(n),),
+        )
+        rows = cur.fetchall() or []
+    out = []
+    for doc_path, chunk_index, chunk_text, meta in rows:
+        out.append(
+            {
+                "doc_path": str(doc_path),
+                "chunk_index": int(chunk_index),
+                "chunk_text": str(chunk_text),
+                "meta": meta,
+            }
+        )
+    return out
+
+
+def search_chunks(conn, query_text: str, top_k: int):
+    """note: Returns top-k similar chunks using query_text as the seed (retrieval is deterministic given seed embedding)."""
+    raise NotImplementedError("search_chunks requires embedding query_text; implement using your existing embed+similarity_search.")

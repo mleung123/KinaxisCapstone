@@ -1,0 +1,2 @@
+Generate one multiple-choice question from the provided domain material.
+If no material is provided yet, generate a placeholder question about supply chain fundamentals.
