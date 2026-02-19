@@ -141,29 +141,6 @@ def upsert_chunks(
     return count
 
 
-def get_seed_chunk_text(conn: psycopg.Connection, offset: int) -> str:
-    """note: Deterministically selects a seed chunk text using an offset modulo rowcount."""
-    total = chunks_rowcount(conn)
-    if total <= 0:
-        raise RuntimeError("No chunks available in DB. Run ingest first.")
-    use_off = int(offset) % int(total)
-    with conn.cursor() as cur:
-        cur.execute(
-            """
-            SELECT chunk_text
-            FROM rag_chunks
-            ORDER BY id
-            OFFSET %s
-            LIMIT 1;
-            """,
-            (use_off,),
-        )
-        row = cur.fetchone()
-        if not row:
-            raise RuntimeError("Failed to fetch seed chunk text.")
-        return str(row[0])
-
-
 def similarity_search(conn: psycopg.Connection, query_embedding: list[float], top_k: int) -> list[dict[str, Any]]:
     """note: Retrieves top-k chunks by vector distance using pgvector (<->) operator."""
     qv = _vector_literal(query_embedding)
@@ -191,9 +168,6 @@ def similarity_search(conn: psycopg.Connection, query_embedding: list[float], to
         )
     return out
 
-def db_has_chunks(conn) -> bool:
-    """note: Returns True if rag_chunks exists and has at least one row."""
-    return chunks_rowcount(conn) > 0
 
 def get_random_chunks(conn, n: int = 1):
     """note: Returns n arbitrary chunk rows for seeding generation."""
@@ -220,7 +194,3 @@ def get_random_chunks(conn, n: int = 1):
         )
     return out
 
-
-def search_chunks(conn, query_text: str, top_k: int):
-    """note: Returns top-k similar chunks using query_text as the seed (retrieval is deterministic given seed embedding)."""
-    raise NotImplementedError("search_chunks requires embedding query_text; implement using your existing embed+similarity_search.")

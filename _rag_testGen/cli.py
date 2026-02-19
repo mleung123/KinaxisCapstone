@@ -108,7 +108,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.cmd == "generate":
-        run_id = args.run_id or cfg.run_id or _default_run_id()
+        run_id = args.run_id or cfg.run_id
         gen_cfg = GenerateConfig(
             db_dsn=cfg.db_dsn,
             lm_url=cfg.lm_url,
@@ -129,7 +129,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.cmd == "pipeline":
-        run_id = args.run_id or cfg.run_id or _default_run_id()
+        run_id = args.run_id or cfg.run_id
         pipe_cfg = PipelineConfig(
             db_dsn=cfg.db_dsn,
             domain_dir=cfg.domain_dir,

@@ -35,11 +35,6 @@ def _env_int(name: str) -> int | None:
         raise ValueError(f"Invalid int for {name}: {v}") from e
 
 
-def _default_run_id() -> str:
-    """note: Returns a UTC timestamp run_id suitable for folder/file names and traceability."""
-    return datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%SZ")
-
-
 def _redact_dsn(dsn: str) -> str:
     """note: Redacts password-like segments in a DSN for safe logging."""
     return re.sub(r":([^:@/]+)@", ":***@", dsn)
