@@ -16,7 +16,7 @@ def _utc_now_iso() -> str:
 
 
 def _truncate(s: str, limit: int) -> str:
-    """note: Truncates a string to a safe length for logs without breaking the pipeline."""
+    """note: Truncates a string to a safe length for logs/exceptions without breaking the pipeline."""
     if s is None:
         return ""
     s = str(s)
@@ -46,7 +46,6 @@ def _append_http_log(record: dict[str, Any]) -> None:
         with open(path, "a", encoding="utf-8") as f:
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
     except Exception:
-        # Never break the pipeline due to logging failures.
         return
 
 
@@ -75,13 +74,44 @@ def call_llm(
 
     t0 = time.perf_counter()
     status_code: int | None = None
+    response_text: str = ""
 
     try:
-        r = requests.post(url, json=payload, timeout=request_timeout_seconds)
+        r = requests.post(url, json=payload, timeout=int(request_timeout_seconds))
         status_code = int(r.status_code)
-        r.raise_for_status()
-        data = r.json()
+        response_text = r.text or ""
 
+        if not r.ok:
+            err_body = _truncate(response_text, 4000)
+            _append_http_log(
+                {
+                    "ts_utc": _utc_now_iso(),
+                    "run_id": run_id,
+                    "endpoint": "/v1/chat/completions",
+                    "url": url,
+                    "model": model,
+                    "temperature": float(temperature),
+                    "max_tokens": int(max_tokens),
+                    "timeout_s": int(request_timeout_seconds),
+                    "status": status_code,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 2),
+                    "system_chars": len(system_prompt or ""),
+                    "user_chars": len(user_prompt or ""),
+                    "ok": False,
+                    "error_type": "HTTPError",
+                    "error": f"HTTP {status_code}",
+                    "response_body_trunc": err_body,
+                }
+            )
+            raise RuntimeError(
+                "LM Studio chat completion failed.\n"
+                f"HTTP {status_code}\n"
+                f"url={url}\n"
+                f"model={model!r}\n"
+                f"response_body={err_body}"
+            )
+
+        data = r.json()
         try:
             out = data["choices"][0]["message"]["content"]
         except Exception as e:  # noqa: BLE001
