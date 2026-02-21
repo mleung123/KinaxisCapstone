@@ -67,16 +67,28 @@ def validate_generator_schema(gen_text: str) -> tuple[bool, list[str]]:
     t = gen_text or ""
     violations: list[str] = []
 
-    required_labels = ["question:", "a)", "b)", "c)", "d)", "correct_key:", "correct key:", "difficulty:"]
-    lower = t.lower()
-    for lab in required_labels:
-        if lab not in lower:
-            violations.append(f"missing_{lab.replace(':','').replace(')','')}")
-    # validate correct key
+    # Required structural elements (line-anchored, case-insensitive).
+    if not re.search(r"^\s*question\s*:", t, flags=re.IGNORECASE | re.MULTILINE):
+        violations.append("missing_question")
+
+    for opt in ["a", "b", "c", "d"]:
+        if not re.search(rf"^\s*{opt}\)\s*", t, flags=re.IGNORECASE | re.MULTILINE):
+            violations.append(f"missing_{opt}")
+
+    # Correct key label: allow "correct_key:" or "correct key:"
+    if not re.search(r"^\s*correct[_ ]key\s*:", t, flags=re.IGNORECASE | re.MULTILINE):
+        violations.append("missing_correct_key")
+
+    # Difficulty label
+    if not re.search(r"^\s*difficulty\s*:", t, flags=re.IGNORECASE | re.MULTILINE):
+        violations.append("missing_difficulty")
+
+    # Validate correct key value
     m = re.search(r"correct[_ ]key\s*:\s*([A-Da-d])", t, flags=re.IGNORECASE)
     if not m:
         violations.append("bad_correct_key")
-    # validate difficulty tag
+
+    # Validate difficulty value
     m2 = re.search(r"difficulty\s*:\s*(easy|medium|hard)", t, flags=re.IGNORECASE)
     if not m2:
         violations.append("bad_difficulty")
@@ -93,5 +105,59 @@ def enforce_hygiene_on_review(review_json: dict[str, Any] | None) -> dict[str, A
     out["failure_layer"] = str(review_json.get("failure_layer", "") or "")
     out["reason_codes"] = review_json.get("reason_codes", [])
     out["revision_instructions"] = str(review_json.get("revision_instructions", "") or "")
-    out["reviewer_parse_ok"] = bool(review_json.get("decision", ""))
+
+    def _to_int(v: Any) -> int | None:
+        try:
+            if v is None:
+                return None
+            return int(v)
+        except Exception:
+            return None
+
+    def _score_1_5(v: Any) -> int | None:
+        n = _to_int(v)
+        if n is None:
+            return None
+        if 1 <= n <= 5:
+            return n
+        return None
+
+    def _to_bool(v: Any) -> bool | None:
+        if isinstance(v, bool):
+            return v
+        if v is None:
+            return None
+        if isinstance(v, (int, float)):
+            return bool(int(v))
+        s = str(v).strip().lower()
+        if s in {"true", "t", "1", "yes", "y"}:
+            return True
+        if s in {"false", "f", "0", "no", "n"}:
+            return False
+        return None
+
+    out["source_alignment"] = _score_1_5(review_json.get("source_alignment"))
+    out["distractor_quality"] = _score_1_5(review_json.get("distractor_quality"))
+    out["stem_clarity"] = _score_1_5(review_json.get("stem_clarity"))
+    out["difficulty_match"] = _to_bool(review_json.get("difficulty_match"))
+
+    violations: list[str] = []
+    if out["decision"] == "UNKNOWN":
+        violations.append("bad_decision")
+    if out["source_alignment"] is None:
+        violations.append("bad_source_alignment")
+    if out["distractor_quality"] is None:
+        violations.append("bad_distractor_quality")
+    if out["stem_clarity"] is None:
+        violations.append("bad_stem_clarity")
+    if out["difficulty_match"] is None:
+        violations.append("bad_difficulty_match")
+
+    out["reviewer_schema_ok"] = (len(violations) == 0)
+    out["reviewer_schema_violations"] = violations
+
+    # Keep backward-compatible meaning: parse ok means “we got a usable structured review record”.
+    out["reviewer_parse_ok"] = bool(out["reviewer_schema_ok"])
+
     return out
+

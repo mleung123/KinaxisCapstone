@@ -71,6 +71,9 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
         _set_meta(conn, "embedding_dim", str(int(embedding_dim)))
         _set_meta(conn, "embed_model", str(cfg.embed_model))
         _set_meta(conn, "source_root", str(domain_dir))
+        _set_meta(conn, "batch_size", str(int(cfg.batch_size)))
+        _set_meta(conn, "chunk_chars", str(int(cfg.chunk_chars)))
+        _set_meta(conn, "overlap_chars", str(int(cfg.overlap_chars)))
 
         if cfg.clear_first:
             cleared = clear_chunks(conn)

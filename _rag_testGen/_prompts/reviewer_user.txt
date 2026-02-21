@@ -1,10 +1,50 @@
-Review the following generated item.
+You will evaluate the generated multiple-choice item against the retrieved source context.
 
-Return JSON with keys:
-decision: "ACCEPT" | "REVISE" | "REJECT"
-failure_layer: short string (optional)
-reason_codes: array of short strings (optional)
-revision_instructions: string (optional)
+Return exactly one JSON object (no markdown, no extra text) with this schema:
+
+{
+"decision": "ACCEPT" | "REVISE" | "REJECT",
+"source_alignment": 1-5,
+"distractor_quality": 1-5,
+"stem_clarity": 1-5,
+"difficulty_match": true | false,
+"failure_layer": "GENERATOR" | "RETRIEVAL" | "PROMPT" | "UNKNOWN",
+"reason_codes": ["..."],
+"revision_instructions": "..."
+}
+
+Scoring anchors:
+
+source_alignment:
+1 = not supported by context (hallucinated)
+3 = partially supported / vague support
+5 = directly supported by context text
+
+distractor_quality:
+1 = implausible or obviously wrong distractors
+3 = mixed plausibility; at least one weak distractor
+5 = all distractors plausible but clearly incorrect given context
+
+stem_clarity:
+1 = ambiguous, ungrammatical, or unclear ask
+3 = mostly clear with minor issues
+5 = unambiguous and clean
+
+difficulty_match:
+true if the item’s stated difficulty (easy/medium/hard) matches the apparent cognitive demand and the context complexity; otherwise false
+
+Rules:
+
+If the context does not contain enough information to justify the item, source_alignment must be 1 or 2 and decision must be REVISE or REJECT.
+
+Prefer REVISE over REJECT when a small edit could fix grounding or clarity.
+
+Provide reason_codes as short stable tags (snake_case). Use 1-5 tags.
+
+revision_instructions must be actionable and specific.
+
+Retrieved context:
+{{CONTEXT}}
 
 Generated item:
 {{GEN_ITEM}}

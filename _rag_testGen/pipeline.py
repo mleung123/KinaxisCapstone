@@ -55,9 +55,9 @@ class GenerateConfig:
     top_k: int = 6
     temperature_gen: float = 0.2
     temperature_review: float = 0.0
-    max_tokens_gen: int = 700
-    max_tokens_review: int = 700
-    request_timeout_seconds: int = 120
+    max_tokens_gen: int = 300
+    max_tokens_review: int = 350
+    request_timeout_seconds: int = 600
     sleep_seconds: float = 0.0
 
 
@@ -95,24 +95,75 @@ def _parse_item_fields(gen_text: str) -> dict[str, str]:
     t = gen_text or ""
     lines = [ln.rstrip() for ln in t.splitlines()]
 
-    def _grab_after(prefix: str) -> str:
-        pref = prefix.lower()
+    def _starts_with_any(s: str, prefixes: list[str]) -> bool:
+        ss = (s or "").lstrip().lower()
+        return any(ss.startswith(p) for p in prefixes)
+
+    def _grab_label_value(label: str) -> str:
+        """note: Grabs the value on the same line after 'label:' (case-insensitive)."""
+        lab = label.lower()
         for ln in lines:
-            if ln.lower().startswith(pref):
-                return ln.split(":", 1)[1].strip() if ":" in ln else ""
+            s = (ln or "").lstrip()
+            if s.lower().startswith(lab):
+                if ":" in s:
+                    return s.split(":", 1)[1].strip()
+                return ""
         return ""
 
+    def _grab_multiline_after_label(label: str) -> str:
+        """note: If 'label:' has no inline value, capture subsequent non-empty lines until a terminator label/option."""
+        lab = label.lower()
+        i_label = None
+        for i, ln in enumerate(lines):
+            s = (ln or "").lstrip()
+            if s.lower().startswith(lab):
+                i_label = i
+                # inline value wins if present
+                if ":" in s:
+                    inline = s.split(":", 1)[1].strip()
+                    if inline:
+                        return inline
+                break
+
+        if i_label is None:
+            return ""
+
+        parts: list[str] = []
+        terminators = ["a)", "b)", "c)", "d)", "correct", "difficulty"]
+        for j in range(i_label + 1, len(lines)):
+            s = (lines[j] or "").strip()
+            if not s:
+                if parts:
+                    break
+                continue
+            if _starts_with_any(s, terminators):
+                break
+            parts.append(s)
+
+        return " ".join(parts).strip()
+
     out: dict[str, str] = {}
-    out["question"] = _grab_after("question")
+
+    # Question can be "Question: <text>" or "Question:" on its own line followed by the stem.
+    out["question"] = _grab_multiline_after_label("question")
+
+    # Choices
     for opt in ["a)", "b)", "c)", "d)"]:
         val = ""
         for ln in lines:
-            if ln.lower().startswith(opt):
-                val = ln.split(")", 1)[1].strip() if ")" in ln else ""
+            s = (ln or "").lstrip()
+            if s.lower().startswith(opt):
+                # tolerate "a) ..." or "a)..." forms
+                val = s.split(")", 1)[1].strip() if ")" in s else ""
                 break
         out[opt[0]] = val
-    out["correct_key"] = _grab_after("correct_key") or _grab_after("correct key")
-    out["difficulty"] = _grab_after("difficulty").lower()
+
+    # Correct key can be "correct_key:" or "correct key:"
+    out["correct_key"] = _grab_label_value("correct_key") or _grab_label_value("correct key")
+
+    # Difficulty (normalize to lowercase)
+    out["difficulty"] = (_grab_label_value("difficulty") or "").lower()
+
     return out
 
 
@@ -142,43 +193,70 @@ def write_run_xlsx(
     ws_items = wb.active
     ws_items.title = "Items"
     items_headers = [
-        "run_id", "item_id", "question", "a", "b", "c", "d",
-        "correct_key", "difficulty", "decision", "schema_ok",
-        "schema_violations", "gen_text_clean",
+        "run_id", "item_id",
+        "question", "a", "b", "c", "d",
+        "correct_key", "difficulty",
+        "decision",
+        "source_alignment", "distractor_quality", "stem_clarity", "difficulty_match",
+        "schema_ok", "schema_violations",
+        "reviewer_schema_ok", "reviewer_schema_violations",
+        "gen_text_clean",
+        "seed_doc_path",
     ]
     items_data: list[list[Any]] = []
     for r in items_rows:
-        items_data.append([
-            r.get("run_id"), r.get("item_id"), r.get("question"),
-            r.get("a"), r.get("b"), r.get("c"), r.get("d"),
-            r.get("correct_key"), r.get("difficulty"), r.get("decision"),
-            r.get("schema_ok"), r.get("schema_violations"), r.get("gen_text_clean"),
-        ])
+        items_data.append(
+            [
+                r.get("run_id"), r.get("item_id"),
+                r.get("question"), r.get("a"), r.get("b"), r.get("c"), r.get("d"),
+                r.get("correct_key"), r.get("difficulty"),
+                r.get("decision"),
+                r.get("source_alignment"), r.get("distractor_quality"), r.get("stem_clarity"), r.get("difficulty_match"),
+                r.get("schema_ok"), r.get("schema_violations"),
+                r.get("reviewer_schema_ok"), r.get("reviewer_schema_violations"),
+                r.get("gen_text_clean"),
+                r.get("seed_doc_path"),
+            ]
+        )
     _xlsx_write_sheet(ws_items, items_headers, items_data)
 
     ws_rev = wb.create_sheet("Reviewer Decisions")
     rev_headers = [
-        "run_id", "item_id", "decision", "failure_layer",
-        "reason_codes", "revision_instructions", "reviewer_parse_ok",
+        "run_id", "item_id", "decision",
+        "source_alignment", "distractor_quality", "stem_clarity", "difficulty_match",
+        "failure_layer",
+        "reason_codes",
+        "revision_instructions",
+        "reviewer_schema_ok",
+        "reviewer_schema_violations",
+        "reviewer_parse_ok",
     ]
     rev_data: list[list[Any]] = []
     for r in decisions_rows:
-        rev_data.append([
-            r.get("run_id"), r.get("item_id"), r.get("decision"),
-            r.get("failure_layer"),
-            json.dumps(r.get("reason_codes", []), ensure_ascii=False),
-            r.get("revision_instructions"), r.get("reviewer_parse_ok"),
-        ])
+        rev_data.append(
+            [
+                r.get("run_id"), r.get("item_id"), r.get("decision"),
+                r.get("source_alignment"), r.get("distractor_quality"), r.get("stem_clarity"), r.get("difficulty_match"),
+                r.get("failure_layer"),
+                json.dumps(r.get("reason_codes", []), ensure_ascii=False),
+                r.get("revision_instructions"),
+                r.get("reviewer_schema_ok"),
+                json.dumps(r.get("reviewer_schema_violations", []), ensure_ascii=False),
+                r.get("reviewer_parse_ok"),
+            ]
+        )
     _xlsx_write_sheet(ws_rev, rev_headers, rev_data)
 
     ws_trace = wb.create_sheet("Traceability")
     trace_headers = ["run_id", "item_id", "doc_path", "chunk_index", "distance", "chunk_text"]
     trace_data: list[list[Any]] = []
     for r in trace_rows:
-        trace_data.append([
-            r.get("run_id"), r.get("item_id"), r.get("doc_path"),
-            r.get("chunk_index"), r.get("distance"), r.get("chunk_text"),
-        ])
+        trace_data.append(
+            [
+                r.get("run_id"), r.get("item_id"), r.get("doc_path"),
+                r.get("chunk_index"), r.get("distance"), r.get("chunk_text"),
+            ]
+        )
     _xlsx_write_sheet(ws_trace, trace_headers, trace_data)
 
     ws_meta = wb.create_sheet("Run Metadata")
@@ -191,7 +269,15 @@ def write_run_xlsx(
         meta_rows.append([k, v])
     _xlsx_write_sheet(ws_meta, meta_headers, meta_rows)
 
-    # ---- DB Snapshot sheet ----
+    ws_q = wb.create_sheet("Quality Metrics")
+    ws_q.append(["metric", "value"])
+    for k in sorted(metadata.keys()):
+        if str(k).startswith("quality."):
+            v = metadata[k]
+            if isinstance(v, (dict, list)):
+                v = json.dumps(v, ensure_ascii=False)
+            ws_q.append([k, ("" if v is None else v)])
+
     ws_snap = wb.create_sheet("DB Snapshot")
     ws_snap.append(["--- Summary ---", ""])
     for k, v in sorted((db_snapshot_summary or {}).items()):
@@ -204,13 +290,15 @@ def write_run_xlsx(
     ]
     ws_snap.append(per_doc_headers)
     for row in (db_snapshot_per_doc or []):
-        ws_snap.append([
-            row.get("doc_path", ""),
-            row.get("chunk_count", ""),
-            row.get("doc_sha256", ""),
-            row.get("first_created_at", "") or "",
-            row.get("last_updated_at", "") or "",
-        ])
+        ws_snap.append(
+            [
+                row.get("doc_path", ""),
+                row.get("chunk_count", ""),
+                row.get("doc_sha256", ""),
+                row.get("first_created_at", "") or "",
+                row.get("last_updated_at", "") or "",
+            ]
+        )
 
     wb.save(xlsx_path)
     return xlsx_path
@@ -270,6 +358,7 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
     reviewer_user_template = (prompts_dir / "reviewer_user.txt").read_text(encoding="utf-8")
 
     keep_raw_csv = (os.environ.get("KEEP_RAW_CSV") or "").strip() in {"1", "true", "TRUE", "yes", "YES"}
+    condition_label = (os.environ.get("CONDITION_LABEL") or "").strip() or "baseline"
 
     created_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     out_dir = Path(cfg.out_dir)
@@ -288,6 +377,8 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
             "prompts_dir": str(cfg.prompts_dir),
             "out_dir": str(cfg.out_dir),
             "top_k": int(cfg.top_k),
+            "sleep_seconds": float(cfg.sleep_seconds),
+            "condition_label": str(condition_label),
         },
         "prompt_files": {
             "generator_system": "generator_system.txt",
@@ -305,10 +396,21 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
 
     schema_ok_count = 0
     reviewer_json_ok = 0
+    reviewer_schema_ok_count = 0
     decisions_count: dict[str, int] = {}
-    
+
     db_snap_summary: dict[str, Any] | None = None
     db_snap_per_doc: list[dict[str, Any]] | None = None
+
+    def _mean(nums: list[int]) -> float | None:
+        if not nums:
+            return None
+        return sum(nums) / float(len(nums))
+        
+    def _cap_text(s: str, max_chars: int) -> str:
+        """note: Caps a string by characters to protect LM Studio context window."""
+        s = s or ""
+        return s if len(s) <= max_chars else (s[:max_chars] + "\n...[truncated]")
 
     with psycopg.connect(cfg.db_dsn) as conn:
         if chunks_rowcount(conn) <= 0:
@@ -344,8 +446,20 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
                     }
                 )
 
-            context_block = "\n\n".join(f"[{j+1}] {r['chunk_text']}" for j, r in enumerate(retrieved))
-            generator_user = generator_user_template.replace("{{CONTEXT}}", context_block)
+            max_chunk_chars = int(os.environ.get("MAX_CHUNK_CHARS_IN_CONTEXT", "900"))
+            max_context_chars_gen = int(os.environ.get("MAX_CONTEXT_CHARS_GEN", "2800"))
+            max_context_chars_rev = int(os.environ.get("MAX_CONTEXT_CHARS_REV", "1800"))
+
+            parts: list[str] = []
+            for j, r in enumerate(retrieved):
+                ch = _cap_text(str(r.get("chunk_text", "")), max_chunk_chars)
+                parts.append(f"[{j+1}] {ch}")
+
+            context_block_raw = "\n\n".join(parts)
+            context_block_gen = _cap_text(context_block_raw, max_context_chars_gen)
+            context_block_rev = _cap_text(context_block_raw, max_context_chars_rev)
+            
+            generator_user = generator_user_template.replace("{{CONTEXT}}", context_block_gen)
 
             gen_raw = call_llm(
                 lm_url=cfg.lm_url,
@@ -364,7 +478,11 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
 
             parsed_fields = _parse_item_fields(gen_text)
 
-            reviewer_user = reviewer_user_template.replace("{{GEN_ITEM}}", gen_text)
+            reviewer_user = (
+                reviewer_user_template
+                .replace("{{GEN_ITEM}}", gen_text)
+                .replace("{{CONTEXT}}", context_block_rev)
+            )
             rev_raw = call_llm(
                 lm_url=cfg.lm_url,
                 model=cfg.review_model,
@@ -377,10 +495,14 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
 
             rev_json = extract_first_json_obj(rev_raw) or {}
             rev_clean = enforce_hygiene_on_review(rev_json)
+
             if rev_clean.get("reviewer_parse_ok"):
                 reviewer_json_ok += 1
+            if rev_clean.get("reviewer_schema_ok"):
+                reviewer_schema_ok_count += 1
 
-            decisions_count[rev_clean.get("decision", "")] = decisions_count.get(rev_clean.get("decision", ""), 0) + 1
+            decision = rev_clean.get("decision", "")
+            decisions_count[decision] = decisions_count.get(decision, 0) + 1
 
             items_rows.append(
                 {
@@ -393,9 +515,15 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
                     "d": parsed_fields.get("d", ""),
                     "correct_key": parsed_fields.get("correct_key", ""),
                     "difficulty": parsed_fields.get("difficulty", ""),
-                    "decision": rev_clean.get("decision", ""),
+                    "decision": decision,
+                    "source_alignment": rev_clean.get("source_alignment"),
+                    "distractor_quality": rev_clean.get("distractor_quality"),
+                    "stem_clarity": rev_clean.get("stem_clarity"),
+                    "difficulty_match": rev_clean.get("difficulty_match"),
                     "schema_ok": bool(schema_ok),
                     "schema_violations": "|".join(violations),
+                    "reviewer_schema_ok": bool(rev_clean.get("reviewer_schema_ok", False)),
+                    "reviewer_schema_violations": "|".join(rev_clean.get("reviewer_schema_violations", []) or []),
                     "gen_text_clean": gen_text,
                     "seed_doc_path": seed_doc,
                 }
@@ -405,33 +533,65 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
                 {
                     "run_id": cfg.run_id,
                     "item_id": item_id,
-                    "decision": rev_clean.get("decision", ""),
+                    "decision": decision,
+                    "source_alignment": rev_clean.get("source_alignment"),
+                    "distractor_quality": rev_clean.get("distractor_quality"),
+                    "stem_clarity": rev_clean.get("stem_clarity"),
+                    "difficulty_match": rev_clean.get("difficulty_match"),
                     "failure_layer": rev_clean.get("failure_layer", ""),
                     "reason_codes": rev_clean.get("reason_codes", []),
                     "revision_instructions": rev_clean.get("revision_instructions", ""),
+                    "reviewer_schema_ok": bool(rev_clean.get("reviewer_schema_ok", False)),
+                    "reviewer_schema_violations": rev_clean.get("reviewer_schema_violations", []),
                     "reviewer_parse_ok": bool(rev_clean.get("reviewer_parse_ok", False)),
                 }
-            )          
+            )
 
             if cfg.sleep_seconds:
                 time.sleep(float(cfg.sleep_seconds))
-                
+
         db_snap_summary = get_db_snapshot_summary(conn)
         db_snap_per_doc = get_db_snapshot_per_doc(conn)
+
+    valid_reviews = [r for r in decisions_rows if bool(r.get("reviewer_schema_ok"))]
+    sa_vals = [int(r["source_alignment"]) for r in valid_reviews if r.get("source_alignment") is not None]
+    dq_vals = [int(r["distractor_quality"]) for r in valid_reviews if r.get("distractor_quality") is not None]
+    sc_vals = [int(r["stem_clarity"]) for r in valid_reviews if r.get("stem_clarity") is not None]
+    dm_vals = [bool(r["difficulty_match"]) for r in valid_reviews if r.get("difficulty_match") is not None]
+
+    def _pct(num: int, den: int) -> float | None:
+        if den <= 0:
+            return None
+        return (float(num) / float(den)) * 100.0
+
+    sa_gte_4 = sum(1 for v in sa_vals if v >= 4)
+    dq_gte_3 = sum(1 for v in dq_vals if v >= 3)
+    sc_gte_4 = sum(1 for v in sc_vals if v >= 4)
+    dm_true = sum(1 for v in dm_vals if v is True)
 
     meta = {
         "created_at": created_at,
         "run_id": cfg.run_id,
+        "condition_label": str(condition_label),
         "lm_url": cfg.lm_url,
         "embed_model": cfg.embed_model,
         "sme_model": cfg.sme_model,
         "review_model": cfg.review_model,
         "n_items": int(cfg.n_items),
         "top_k": int(cfg.top_k),
+        "sleep_seconds": float(cfg.sleep_seconds),
         "db_dsn_redacted": _redact_dsn(cfg.db_dsn),
         "prompts_dir": str(cfg.prompts_dir),
         "out_dir": str(cfg.out_dir),
         "keep_raw_csv": bool(keep_raw_csv),
+        "quality.valid_review_rows": int(len(valid_reviews)),
+        "quality.mean_source_alignment": _mean(sa_vals),
+        "quality.mean_distractor_quality": _mean(dq_vals),
+        "quality.mean_stem_clarity": _mean(sc_vals),
+        "quality.pct_source_alignment_gte_4": _pct(sa_gte_4, len(sa_vals)),
+        "quality.pct_distractor_quality_gte_3": _pct(dq_gte_3, len(dq_vals)),
+        "quality.pct_stem_clarity_gte_4": _pct(sc_gte_4, len(sc_vals)),
+        "quality.pct_difficulty_match_true": _pct(dm_true, len(dm_vals)),
     }
 
     xlsx_path = write_run_xlsx(
@@ -447,10 +607,12 @@ def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
 
     return {
         "run_id": cfg.run_id,
+        "condition_label": str(condition_label),
         "out_dir": str(cfg.out_dir),
         "items_total": int(cfg.n_items),
         "items_schema_ok": int(schema_ok_count),
         "reviewer_json_ok": int(reviewer_json_ok),
+        "reviewer_schema_ok": int(reviewer_schema_ok_count),
         "decisions": decisions_count,
         "files": {
             "xlsx": str(xlsx_path),

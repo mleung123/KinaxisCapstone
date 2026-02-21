@@ -1,2 +1,14 @@
-Generate one multiple-choice question from the provided domain material.
-If no material is provided yet, generate a placeholder question about supply chain fundamentals.
+Generate exactly one multiple-choice question grounded only in the provided context.
+
+Rules:
+
+Use ONLY facts that appear explicitly in the context.
+
+If the context is insufficient to write a valid grounded item, write the best grounded item you can and keep it generic; do not invent details.
+
+Do not mention the context or citations in the output.
+
+Follow the output contract exactly (labels and formatting).
+
+Context:
+{{CONTEXT}}

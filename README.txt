@@ -136,5 +136,36 @@ Normal run:
 - Answer: N
 - BAT loads config and launches Python
 
-Example1 material found at this URL:
-https://ocw.mit.edu/courses/esd-273j-logistics-and-supply-chain-management-fall-2009/pages/lecture-notes/
+Corpus Material Source Citations
+
+Massachusetts Institute of Technology. (2009). Logistics and supply chain management (ESD.273J) [Lecture notes]. MIT OpenCourseWare.
+https://ocw.mit.edu/courses/esd-273j-logistics-and-supply-chain-management-fall-2009/
+
+Cornell University, Dyson School of Applied Economics and Management. (n.d.). Competition: Supply chains [Course document].
+https://barrett.dyson.cornell.edu/
+
+DeNunzio, S. (2018). Logistics technology and application (BUSML 7386) [Course syllabus]. The Ohio State University.
+
+Li, P. (2024). Production planning and control (OSCM 3333) [Course syllabus]. University of Texas at El Paso.
+
+Adjemian, M. K., Wilson, W. W., Bullock, D. W., & Lakkakula, P. (2021).
+Recent surges in ocean transportation rates and their effects on selected agricultural markets
+[Presentation slides]. University of Georgia; North Dakota State University.
+
+Beer Game Supply Chain Simulation. (n.d.).
+The beer game: Supply chain dynamics and the bullwhip effect [PowerPoint slides].
+
+Overcoming the barriers to supply chain integration. (n.d.).
+Chapter 16: Building integrated supply chains [PowerPoint slides].
+
+Supply chain management. (n.d.).
+Introduction to supply chain management and the bullwhip effect [PowerPoint slides].
+
+Simchi-Levi, D. (2021).
+Supply chain modernization and digitization [Video interview transcript].
+Algo Podcast.
+https://www.youtube.com/watch?v=Bo6J4gkoBXM
+
+Supply Chain Management and the Bullwhip Effect. (n.d.).
+Operations management overview [Video transcript].
+https://www.youtube.com/watch?v=jM0k3em1G_A
