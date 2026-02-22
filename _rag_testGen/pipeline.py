@@ -401,6 +401,35 @@ def _build_chunk_preview_rows(conn: psycopg.Connection, min_alpha_chars: int = 1
 # ---------------------------------------------------------------------
 
 
+def _is_degenerate_context(text: str, max_repeat_ratio: float = 0.25, max_nonascii_ratio: float = 0.15) -> bool:
+    """note: Returns True if the context agent output looks like a hallucination/degeneration loop.
+
+    Two signals:
+    1. Repeated-token ratio: split on whitespace, count how often the single most
+       common token appears. If it dominates more than max_repeat_ratio of all
+       tokens the model is probably looping (e.g. 'beneficiation beneficiation ...').
+    2. Non-ASCII ratio: if more than max_nonascii_ratio of characters are outside
+       the printable ASCII range the model has gone off-script (e.g. CJK characters,
+       random unicode from a confused tokenizer).
+    """
+    if not text or not text.strip():
+        return False
+
+    # Signal 1: repeated token loop
+    tokens = text.split()
+    if tokens:
+        from collections import Counter
+        most_common_count = Counter(tokens).most_common(1)[0][1]
+        if most_common_count / len(tokens) > max_repeat_ratio:
+            return True
+
+    # Signal 2: non-ASCII character flood
+    non_ascii = sum(1 for c in text if ord(c) > 127)
+    if non_ascii / len(text) > max_nonascii_ratio:
+        return True
+
+    return False
+
 def generate_from_db(cfg: GenerateConfig) -> dict[str, Any]:
     """note: Generates items by retrieving top-k chunks, running context rewrite + generator + reviewer, writing XLSX."""
     prompts_dir = Path(cfg.prompts_dir)

@@ -1,6 +1,0 @@
-run_id,item_id,decision,failure_layer,reason_codes,revision_instructions,reviewer_parse_ok,review_raw_json
-20260201_125118,item_1,ACCEPT,NONE,[],[],True,"{""item_id"": ""item_1"", ""decision"": ""ACCEPT"", ""failure_layer"": ""NONE"", ""reason_codes"": [], ""revision_instructions"": []}"
-20260201_125118,item_2,REJECT,HARD,"[""REVIEWER_PARSE_FAIL""]",[],True,"{""item_id"": ""item_2"", ""decision"": ""REJECT"", ""failure_layer"": ""HARD"", ""reason_codes"": [""REVIEWER_PARSE_FAIL""], ""revision_instructions"": []}"
-20260201_125118,item_3,ACCEPT,NONE,[],[],True,"{""item_id"": ""item_3"", ""decision"": ""ACCEPT"", ""failure_layer"": ""NONE"", ""reason_codes"": [], ""revision_instructions"": []}"
-20260201_125118,item_4,ACCEPT,NONE,[],[],True,"{""item_id"": ""item_4"", ""decision"": ""ACCEPT"", ""failure_layer"": ""NONE"", ""reason_codes"": [], ""revision_instructions"": []}"
-20260201_125118,item_5,REJECT,HARD,"[""REVIEWER_PARSE_FAIL""]",[],True,"{""item_id"": ""item_5"", ""decision"": ""REJECT"", ""failure_layer"": ""HARD"", ""reason_codes"": [""REVIEWER_PARSE_FAIL""], ""revision_instructions"": []}"

@@ -34,12 +34,16 @@ Do NOT summarize
 Do NOT reorder content
 Do NOT add or remove facts
 Do NOT infer missing words
-Do NOT “clarify” ambiguous statements
+Do NOT "clarify" ambiguous statements
 Do NOT merge separate concepts into one sentence
+
+Fallback rule (IMPORTANT):
+If the source text is so corrupted (garbled symbols, broken formulas, unreadable OCR artifacts) that meaningful normalization is not possible, output exactly the following single line and nothing else:
+CONTEXT_UNREADABLE
 
 Output requirements:
 
-Output ONLY the rewritten text
+Output ONLY the rewritten text, or CONTEXT_UNREADABLE if the fallback applies
 Preserve paragraph boundaries
 Preserve list structure if present
 No commentary, no markdown, no explanations

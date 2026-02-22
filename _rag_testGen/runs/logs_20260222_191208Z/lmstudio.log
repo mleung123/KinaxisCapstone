@@ -1,0 +1,535 @@
+[2025-09-25 02:39:59.435] [info]  App starting...
+[2025-09-25 02:39:59.440] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-09-25 02:40:00.352] [info]  Hardware survey for general system resources through 'vulkan' took 826.04ms
+[2025-09-25 02:40:02.403] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-09-25 02:40:02.404] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-09-25 02:40:02.405] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-09-25 02:40:02.905] [info]  [AppUpdater] Received version info response
+[2025-09-25 02:40:02.907] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.27 (build: 4)
+[2025-09-25 02:40:02.907] [info]  No update available: 0.3.27 (build: 4) <= 0.3.27 (build: 4)
+[2025-09-25 02:40:02.908] [info]  AppUpdater state changed to idle
+[2025-09-25 02:40:26.415] [error] [amphibianUtils] Error getting Python path for amphibian runtime layer: Error: Failed to parse venvstacks for C:\Users\kadek\.lmstudio\extensions\backends\vendor\_amphibian\.tmp-1853051847200: ENOENT: no such file or directory, open 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\_amphibian\.tmp-1853051847200\share\venv\metadata\venvstacks_layer.json'
+    at _0x1ce762 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:20609)
+    at async _0x4a37b9 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:20958)
+    at async _0x5568d2.<computed> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:13073)
+    at async _0x1f44c8 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:9132)
+    at async _0x1f44c8 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:9055)
+    at async _0x2fc476.indexVendorLibs (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:9547)
+    at async _0x2fc476.reindexVendorLibs (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:9930)
+    at async _0x2fc476.performInitialIndex (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:279:10661)
+    at async Promise.all (index 0)
+    at async C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:624:26790
+[2025-09-25 02:56:00.749] [warn]  Could not find an exact bits-per-weight value for quant type 'Q4'. Defaulting to Q4_K_M (5.577499999999999 BPW).
+[2025-09-25 02:56:00.758] [warn]  Could not find an exact bits-per-weight value for quant type 'Q4'. Defaulting to Q4_K_M (5.577499999999999 BPW).
+[2025-09-25 02:56:07.178] [error] (node:24400) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
+(Use `LM Studio --trace-deprecation ...` to show where the warning was created)
+[2025-09-30 10:28:00.071] [info]  App starting...
+[2025-09-30 10:28:00.086] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-09-30 10:28:00.790] [info]  Hardware survey for general system resources through 'vulkan' took 685.78ms
+[2025-09-30 10:28:01.894] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-09-30 10:28:01.906] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-09-30 10:28:01.918] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-09-30 10:28:02.046] [info]  Running in headless mode.
+[2025-09-30 10:28:02.539] [info]  [AppUpdater] Received version info response
+[2025-09-30 10:28:02.549] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.27 (build: 4)
+[2025-09-30 10:28:02.559] [info]  No update available: 0.3.27 (build: 4) <= 0.3.27 (build: 4)
+[2025-09-30 10:28:02.572] [info]  AppUpdater state changed to idle
+[2025-09-30 10:32:09.653] [info]  App starting...
+[2025-09-30 10:32:09.667] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-09-30 10:32:10.794] [info]  Hardware survey for general system resources through 'vulkan' took 1109.04ms
+[2025-09-30 10:32:11.348] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-09-30 10:32:11.358] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-09-30 10:32:11.369] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-09-30 10:32:11.476] [info]  Running in headless mode.
+[2025-09-30 10:32:11.725] [info]  [AppUpdater] Received version info response
+[2025-09-30 10:32:11.733] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.27 (build: 4)
+[2025-09-30 10:32:11.743] [info]  No update available: 0.3.27 (build: 4) <= 0.3.27 (build: 4)
+[2025-09-30 10:32:11.752] [info]  AppUpdater state changed to idle
+[2025-10-01 08:11:21.176] [info]  App starting...
+[2025-10-01 08:11:21.188] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-01 08:11:21.965] [info]  Hardware survey for general system resources through 'vulkan' took 761.49ms
+[2025-10-01 08:11:22.400] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-01 08:11:22.408] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-01 08:11:22.415] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-01 08:11:22.501] [info]  Running in headless mode.
+[2025-10-01 08:11:22.776] [info]  [AppUpdater] Received version info response
+[2025-10-01 08:11:22.784] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.27 (build: 4)
+[2025-10-01 08:11:22.791] [info]  No update available: 0.3.27 (build: 4) <= 0.3.27 (build: 4)
+[2025-10-01 08:11:22.798] [info]  AppUpdater state changed to idle
+[2025-10-01 17:30:35.114] [info]  App starting...
+[2025-10-01 17:30:35.129] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-01 17:30:36.017] [info]  Hardware survey for general system resources through 'vulkan' took 867.90ms
+[2025-10-01 17:30:36.398] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-01 17:30:36.405] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-01 17:30:36.413] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-01 17:30:36.510] [info]  Running in headless mode.
+[2025-10-01 17:30:36.785] [info]  [AppUpdater] Received version info response
+[2025-10-01 17:30:36.795] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.27 (build: 4)
+[2025-10-01 17:30:36.806] [info]  No update available: 0.3.27 (build: 4) <= 0.3.27 (build: 4)
+[2025-10-01 17:30:36.815] [info]  AppUpdater state changed to idle
+[2025-10-10 09:16:52.435] [info]  App starting...
+[2025-10-10 09:16:52.449] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-10 09:16:53.485] [info]  Hardware survey for general system resources through 'vulkan' took 1017.71ms
+[2025-10-10 09:16:53.880] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-10 09:16:53.889] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-10 09:16:53.896] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-10 09:16:53.985] [info]  Running in headless mode.
+[2025-10-10 09:16:54.263] [info]  [AppUpdater] Received version info response
+[2025-10-10 09:16:54.270] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.30 (build: 1)
+[2025-10-10 09:16:54.277] [info]  Update available: 0.3.30 > 0.3.27
+[2025-10-10 09:16:54.286] [info]  AppUpdater state changed to update-available
+[2025-10-10 13:27:17.492] [info]  App starting...
+[2025-10-10 13:27:17.502] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-10 13:27:18.516] [info]  Hardware survey for general system resources through 'vulkan' took 1000.48ms
+[2025-10-10 13:27:18.920] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-10 13:27:18.930] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-10 13:27:18.940] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-10 13:27:19.047] [info]  Running in headless mode.
+[2025-10-10 13:27:19.283] [info]  [AppUpdater] Received version info response
+[2025-10-10 13:27:19.294] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.30 (build: 1)
+[2025-10-10 13:27:19.303] [info]  Update available: 0.3.30 > 0.3.27
+[2025-10-10 13:27:19.314] [info]  AppUpdater state changed to update-available
+[2025-10-15 08:03:40.520] [info]  App starting...
+[2025-10-15 08:03:40.536] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-15 08:03:41.710] [info]  Hardware survey for general system resources through 'vulkan' took 1153.53ms
+[2025-10-15 08:03:42.102] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-15 08:03:42.113] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-15 08:03:42.123] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-15 08:03:42.235] [info]  Running in headless mode.
+[2025-10-15 08:03:42.531] [info]  [AppUpdater] Received version info response
+[2025-10-15 08:03:42.541] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.30 (build: 1)
+[2025-10-15 08:03:42.552] [info]  Update available: 0.3.30 > 0.3.27
+[2025-10-15 08:03:42.567] [info]  AppUpdater state changed to update-available
+[2025-10-16 15:19:00.787] [info]  App starting...
+[2025-10-16 15:19:00.798] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-16 15:19:01.774] [info]  Hardware survey for general system resources through 'vulkan' took 959.34ms
+[2025-10-16 15:19:02.123] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-16 15:19:02.130] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-16 15:19:02.137] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-16 15:19:02.221] [info]  Running in headless mode.
+[2025-10-16 15:19:02.669] [info]  [AppUpdater] Received version info response
+[2025-10-16 15:19:02.678] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.30 (build: 1)
+[2025-10-16 15:19:02.688] [info]  Update available: 0.3.30 > 0.3.27
+[2025-10-16 15:19:02.696] [info]  AppUpdater state changed to update-available
+[2025-10-21 00:33:42.186] [info]  App starting...
+[2025-10-21 00:33:42.196] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-21 00:33:43.209] [info]  Hardware survey for general system resources through 'vulkan' took 997.01ms
+[2025-10-21 00:33:43.597] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-21 00:33:43.604] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-21 00:33:43.612] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.27
+[2025-10-21 00:33:43.697] [info]  Running in headless mode.
+[2025-10-21 00:33:43.919] [info]  [AppUpdater] Received version info response
+[2025-10-21 00:33:43.926] [info]  [AppUpdater] Current version: 0.3.27 (build: 4), new version: 0.3.30 (build: 2)
+[2025-10-21 00:33:43.932] [info]  Update available: 0.3.30 > 0.3.27
+[2025-10-21 00:33:43.942] [info]  AppUpdater state changed to update-available
+[2025-10-23 10:07:40.748] [info]  AppUpdater state changed to downloading-update
+[2025-10-23 10:07:40.761] [info]  Checking for update
+[2025-10-23 10:07:40.772] [info]  Generated new staging user ID: fce21cd2-d3d8-5cfb-9b09-fc17d7537ab7
+[2025-10-23 10:07:41.155] [info]  Found version 0.3.30 (url: LM-Studio-0.3.30-2-win32-x64.exe)
+[2025-10-23 10:07:41.162] [info]  Update available.
+[2025-10-23 10:07:41.170] [info]  Downloading update from LM-Studio-0.3.30-2-win32-x64.exe
+[2025-10-23 10:07:41.185] [debug] updater cache dir: C:\Users\kadek\AppData\Local\lm-studio-updater
+[2025-10-23 10:07:41.194] [warn]  disableWebInstaller is set to false, you should set it to true if you do not plan on using a web installer. This will default to true in a future version.
+[2025-10-23 10:07:41.204] [info]  Download block maps (old: "https://updates.lmstudio.ai/LM-Studio-0.3.27+4-2-win32-x64.exe.blockmap", new: https://updates.lmstudio.ai/LM-Studio-0.3.30-2-win32-x64.exe.blockmap)
+[2025-10-23 10:07:41.337] [error] Cannot download differentially, fallback to full download: Error: Cannot download "https://updates.lmstudio.ai/LM-Studio-0.3.27+4-2-win32-x64.exe.blockmap", status 404: 
+    at ClientRequest.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:7:129035)
+    at ClientRequest.emit (node:events:518:28)
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:123663)
+    at SimpleURLLoaderWrapper.emit (node:events:518:28)
+[2025-10-23 10:07:42.384] [info]  Download progress: 18.83220156515734%
+[2025-10-23 10:07:43.386] [info]  Download progress: 44.2892038764334%
+[2025-10-23 10:07:44.386] [info]  Download progress: 72.78219460247844%
+[2025-10-23 10:07:45.340] [info]  Download progress: 100%
+[2025-10-23 10:07:45.600] [info]  New version 0.3.30 has been downloaded to C:\Users\kadek\AppData\Local\lm-studio-updater\pending\LM-Studio-0.3.30-2-win32-x64.exe
+[2025-10-23 10:07:45.610] [info]  AppUpdater state changed to update-downloaded
+[2025-10-23 10:08:45.979] [info]  AppUpdater state changed to awaiting-restart
+[2025-10-23 10:08:45.987] [info]  Install on explicit quitAndInstall
+[2025-10-23 10:08:45.995] [info]  Install: isSilent: true, isForceRunAfter: true
+[2025-10-23 10:08:48.142] [info]  Update installer has already been triggered. Quitting application.
+[2025-10-23 10:09:52.619] [info]  App starting...
+[2025-10-23 10:09:52.630] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-23 10:09:53.362] [info]  Hardware survey for general system resources through 'vulkan' took 715.14ms
+[2025-10-23 10:09:53.796] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-23 10:09:53.806] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-23 10:09:53.817] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-10-23 10:09:54.315] [info]  [AppUpdater] Received version info response
+[2025-10-23 10:09:54.325] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.30 (build: 2)
+[2025-10-23 10:09:54.337] [info]  No update available: 0.3.30 (build: 2) <= 0.3.30 (build: 2)
+[2025-10-23 10:09:54.351] [info]  AppUpdater state changed to idle
+[2025-10-23 10:09:55.616] [error] [CachedFileDataProvider] Making backup of file
+[2025-10-23 11:20:09.710] [error] (node:45100) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
+(Use `LM Studio --trace-deprecation ...` to show where the warning was created)
+[2025-10-23 11:25:54.171] [error] (node:45100) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+[2025-10-29 03:23:59.676] [info]  App starting...
+[2025-10-29 03:23:59.686] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-29 03:24:00.719] [info]  Hardware survey for general system resources through 'vulkan' took 1014.19ms
+[2025-10-29 03:24:01.107] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-29 03:24:01.117] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-29 03:24:01.127] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-10-29 03:24:01.220] [info]  Running in headless mode.
+[2025-10-29 03:24:01.462] [info]  [AppUpdater] Received version info response
+[2025-10-29 03:24:01.471] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.30 (build: 2)
+[2025-10-29 03:24:01.480] [info]  No update available: 0.3.30 (build: 2) <= 0.3.30 (build: 2)
+[2025-10-29 03:24:01.488] [info]  AppUpdater state changed to idle
+[2025-10-30 21:20:42.026] [info]  App starting...
+[2025-10-30 21:20:42.037] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-10-30 21:20:42.878] [info]  Hardware survey for general system resources through 'vulkan' took 822.28ms
+[2025-10-30 21:20:43.543] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-10-30 21:20:43.552] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-10-30 21:20:43.560] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-10-30 21:20:43.658] [info]  Running in headless mode.
+[2025-10-30 21:20:43.923] [info]  [AppUpdater] Received version info response
+[2025-10-30 21:20:43.932] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.30 (build: 2)
+[2025-10-30 21:20:43.939] [info]  No update available: 0.3.30 (build: 2) <= 0.3.30 (build: 2)
+[2025-10-30 21:20:43.948] [info]  AppUpdater state changed to idle
+[2025-11-04 03:45:23.705] [info]  App starting...
+[2025-11-04 03:45:23.716] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-11-04 03:45:24.569] [info]  Hardware survey for general system resources through 'vulkan' took 832.88ms
+[2025-11-04 03:45:24.974] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-11-04 03:45:24.984] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-11-04 03:45:24.994] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-11-04 03:45:25.087] [info]  Running in headless mode.
+[2025-11-04 03:45:25.353] [info]  [AppUpdater] Received version info response
+[2025-11-04 03:45:25.363] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.30 (build: 2)
+[2025-11-04 03:45:25.373] [info]  No update available: 0.3.30 (build: 2) <= 0.3.30 (build: 2)
+[2025-11-04 03:45:25.382] [info]  AppUpdater state changed to idle
+[2025-11-08 22:03:06.517] [info]  App starting...
+[2025-11-08 22:03:06.528] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-11-08 22:03:07.330] [info]  Hardware survey for general system resources through 'vulkan' took 780.46ms
+[2025-11-08 22:03:07.756] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-11-08 22:03:07.766] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-11-08 22:03:07.776] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-11-08 22:03:07.887] [info]  Running in headless mode.
+[2025-11-08 22:03:08.150] [info]  [AppUpdater] Received version info response
+[2025-11-08 22:03:08.160] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.31 (build: 7)
+[2025-11-08 22:03:08.169] [info]  Update available: 0.3.31 > 0.3.30
+[2025-11-08 22:03:08.180] [info]  AppUpdater state changed to update-available
+[2025-11-09 06:02:47.399] [info]  App starting...
+[2025-11-09 06:02:47.410] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-11-09 06:02:48.212] [info]  Hardware survey for general system resources through 'vulkan' took 785.08ms
+[2025-11-09 06:02:48.563] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-11-09 06:02:48.570] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-11-09 06:02:48.577] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-11-09 06:02:48.672] [info]  Running in headless mode.
+[2025-11-09 06:02:48.889] [info]  [AppUpdater] Received version info response
+[2025-11-09 06:02:48.896] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.31 (build: 7)
+[2025-11-09 06:02:48.903] [info]  Update available: 0.3.31 > 0.3.30
+[2025-11-09 06:02:48.912] [info]  AppUpdater state changed to update-available
+[2025-11-12 12:26:20.635] [info]  App starting...
+[2025-11-12 12:26:20.649] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-11-12 12:26:21.648] [info]  Hardware survey for general system resources through 'vulkan' took 975.14ms
+[2025-11-12 12:26:22.065] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-11-12 12:26:22.076] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-11-12 12:26:22.088] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-11-12 12:26:22.200] [info]  Running in headless mode.
+[2025-11-12 12:26:22.485] [info]  [AppUpdater] Received version info response
+[2025-11-12 12:26:22.494] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.31 (build: 7)
+[2025-11-12 12:26:22.503] [info]  Update available: 0.3.31 > 0.3.30
+[2025-11-12 12:26:22.513] [info]  AppUpdater state changed to update-available
+[2025-12-02 09:59:36.339] [info]  App starting...
+[2025-12-02 09:59:36.354] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-12-02 09:59:37.286] [info]  Hardware survey for general system resources through 'vulkan' took 905.81ms
+[2025-12-02 09:59:37.738] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-12-02 09:59:37.750] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-12-02 09:59:37.761] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-12-02 09:59:37.885] [info]  Running in headless mode.
+[2025-12-02 09:59:38.187] [info]  [AppUpdater] Received version info response
+[2025-12-02 09:59:38.198] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.33 (build: 1)
+[2025-12-02 09:59:38.208] [info]  Update available: 0.3.33 > 0.3.30
+[2025-12-02 09:59:38.218] [info]  AppUpdater state changed to update-available
+[2025-12-02 10:00:17.675] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2025-12-02 13:50:55.594] [info]  App starting...
+[2025-12-02 13:50:55.605] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-12-02 13:50:56.461] [info]  Hardware survey for general system resources through 'vulkan' took 839.05ms
+[2025-12-02 13:50:56.798] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-12-02 13:50:56.804] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-12-02 13:50:56.812] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-12-02 13:50:56.910] [info]  Running in headless mode.
+[2025-12-02 13:50:57.193] [info]  [AppUpdater] Received version info response
+[2025-12-02 13:50:57.201] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.33 (build: 1)
+[2025-12-02 13:50:57.210] [info]  Update available: 0.3.33 > 0.3.30
+[2025-12-02 13:50:57.217] [info]  AppUpdater state changed to update-available
+[2025-12-02 13:51:52.471] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2025-12-04 14:26:46.297] [info]  App starting...
+[2025-12-04 14:26:46.308] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-12-04 14:26:47.127] [info]  Hardware survey for general system resources through 'vulkan' took 799.08ms
+[2025-12-04 14:26:47.583] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-12-04 14:26:47.592] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-12-04 14:26:47.600] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-12-04 14:26:47.743] [info]  Running in headless mode.
+[2025-12-04 14:26:47.955] [info]  [AppUpdater] Received version info response
+[2025-12-04 14:26:47.963] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.33 (build: 1)
+[2025-12-04 14:26:47.972] [info]  Update available: 0.3.33 > 0.3.30
+[2025-12-04 14:26:47.980] [info]  AppUpdater state changed to update-available
+[2025-12-07 07:56:36.234] [info]  App starting...
+[2025-12-07 07:56:36.258] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-12-07 07:56:38.354] [info]  Hardware survey for general system resources through 'vulkan' took 2034.42ms
+[2025-12-07 07:56:39.237] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-12-07 07:56:39.268] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-12-07 07:56:39.301] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-12-07 07:56:39.545] [info]  Running in headless mode.
+[2025-12-07 07:56:39.890] [info]  [AppUpdater] Received version info response
+[2025-12-07 07:56:39.912] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.33 (build: 1)
+[2025-12-07 07:56:39.929] [info]  Update available: 0.3.33 > 0.3.30
+[2025-12-07 07:56:39.957] [info]  AppUpdater state changed to update-available
+[2025-12-09 14:21:55.702] [info]  App starting...
+[2025-12-09 14:21:55.713] [info]  [AppUpdater] Update channel set to 'stable'
+[2025-12-09 14:21:56.593] [info]  Hardware survey for general system resources through 'vulkan' took 860.27ms
+[2025-12-09 14:21:56.964] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2025-12-09 14:21:56.972] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2025-12-09 14:21:56.980] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2025-12-09 14:21:57.078] [info]  Running in headless mode.
+[2025-12-09 14:21:57.350] [info]  [AppUpdater] Received version info response
+[2025-12-09 14:21:57.359] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.34 (build: 1)
+[2025-12-09 14:21:57.367] [info]  Update available: 0.3.34 > 0.3.30
+[2025-12-09 14:21:57.378] [info]  AppUpdater state changed to update-available
+[2025-12-09 14:22:33.893] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2026-01-13 15:25:53.847] [info]  App starting...
+[2026-01-13 15:25:53.860] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-01-13 15:25:54.766] [info]  Hardware survey for general system resources through 'vulkan' took 882.64ms
+[2026-01-13 15:25:55.140] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-01-13 15:25:55.150] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-01-13 15:25:55.160] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.30
+[2026-01-13 15:25:55.253] [info]  Running in headless mode.
+[2026-01-13 15:25:55.679] [info]  [AppUpdater] Received version info response
+[2026-01-13 15:25:55.691] [info]  [AppUpdater] Current version: 0.3.30 (build: 2), new version: 0.3.37 (build: 1)
+[2026-01-13 15:25:55.702] [info]  Update available: 0.3.37 > 0.3.30
+[2026-01-13 15:25:55.714] [info]  AppUpdater state changed to update-available
+[2026-01-13 15:26:34.851] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2026-01-24 11:25:03.069] [info]  AppUpdater state changed to downloading-update
+[2026-01-24 11:25:03.091] [info]  Checking for update
+[2026-01-24 11:25:03.479] [info]  Found version 0.3.39 (url: LM-Studio-0.3.39-2-win32-x64.exe)
+[2026-01-24 11:25:03.490] [info]  Update available.
+[2026-01-24 11:25:03.498] [info]  Downloading update from LM-Studio-0.3.39-2-win32-x64.exe
+[2026-01-24 11:25:03.513] [debug] updater cache dir: C:\Users\kadek\AppData\Local\lm-studio-updater
+[2026-01-24 11:25:03.529] [info]  Cached update sha512 checksum doesn't match the latest available update. New update must be downloaded. Cached: haVlBio5mCwq2E8tDcvCZ7ZHHrL6munACtE/ECOKIzrfvaq45lC3DGmvFdTewRxWvs/xNpPgRnkhs7ZWni1xfg==, expected: vhYul87adIZBS0oEkyw+MaZvTCK/2TBv+rU9fxQXrVkgtcnktnLLhooL26NNeuigC52CMsA4JqOguSv1ohEowA==. Directory for cached update will be cleaned
+[2026-01-24 11:25:03.542] [warn]  disableWebInstaller is set to false, you should set it to true if you do not plan on using a web installer. This will default to true in a future version.
+[2026-01-24 11:25:03.553] [info]  Download block maps (old: "https://updates.lmstudio.ai/LM-Studio-0.3.30+2-2-win32-x64.exe.blockmap", new: https://updates.lmstudio.ai/LM-Studio-0.3.39-2-win32-x64.exe.blockmap)
+[2026-01-24 11:25:03.702] [error] Cannot download differentially, fallback to full download: Error: Cannot download "https://updates.lmstudio.ai/LM-Studio-0.3.39-2-win32-x64.exe.blockmap", status 404: 
+    at ClientRequest.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:7:129218)
+    at ClientRequest.emit (node:events:518:28)
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:123663)
+    at SimpleURLLoaderWrapper.emit (node:events:518:28)
+[2026-01-24 11:25:04.753] [info]  Download progress: 3.333039307319155%
+[2026-01-24 11:25:05.764] [info]  Download progress: 7.211017409654719%
+[2026-01-24 11:25:06.765] [info]  Download progress: 11.347217626412302%
+[2026-01-24 11:25:07.771] [info]  Download progress: 15.420326433862117%
+[2026-01-24 11:25:08.773] [info]  Download progress: 19.56223816897069%
+[2026-01-24 11:25:09.776] [info]  Download progress: 23.680754807822535%
+[2026-01-24 11:25:10.776] [info]  Download progress: 27.783361338634244%
+[2026-01-24 11:25:11.776] [info]  Download progress: 31.678208938433784%
+[2026-01-24 11:25:12.779] [info]  Download progress: 35.7856782430843%
+[2026-01-24 11:25:13.785] [info]  Download progress: 40.00220841641389%
+[2026-01-24 11:25:14.786] [info]  Download progress: 42.775206598560004%
+[2026-01-24 11:25:15.795] [info]  Download progress: 46.76794133153%
+[2026-01-24 11:25:16.797] [info]  Download progress: 50.9584352865503%
+[2026-01-24 11:25:17.803] [info]  Download progress: 55.07077366759787%
+[2026-01-24 11:25:18.809] [info]  Download progress: 59.2952082994104%
+[2026-01-24 11:25:19.810] [info]  Download progress: 63.1150113380222%
+[2026-01-24 11:25:20.822] [info]  Download progress: 67.1221036488479%
+[2026-01-24 11:25:21.824] [info]  Download progress: 71.19761688227345%
+[2026-01-24 11:25:22.826] [info]  Download progress: 75.15792565328607%
+[2026-01-24 11:25:23.827] [info]  Download progress: 79.00887033253893%
+[2026-01-24 11:25:24.827] [info]  Download progress: 81.7766051782547%
+[2026-01-24 11:25:25.832] [info]  Download progress: 84.47941772148849%
+[2026-01-24 11:25:26.832] [info]  Download progress: 88.11615105064067%
+[2026-01-24 11:25:27.842] [info]  Download progress: 92.09698620347588%
+[2026-01-24 11:25:28.842] [info]  Download progress: 96.24770506346691%
+[2026-01-24 11:25:29.844] [info]  Download progress: 99.81858506222544%
+[2026-01-24 11:25:29.888] [info]  Download progress: 100%
+[2026-01-24 11:25:29.896] [info]  New version 0.3.39 has been downloaded to C:\Users\kadek\AppData\Local\lm-studio-updater\pending\LM-Studio-0.3.39-2-win32-x64.exe
+[2026-01-24 11:25:29.901] [info]  AppUpdater state changed to update-downloaded
+[2026-01-24 11:25:33.288] [info]  AppUpdater state changed to awaiting-restart
+[2026-01-24 11:25:33.289] [info]  Install on explicit quitAndInstall
+[2026-01-24 11:25:33.290] [info]  Install: isSilent: true, isForceRunAfter: true
+[2026-01-24 11:25:35.708] [info]  Update installer has already been triggered. Quitting application.
+[2026-01-24 11:26:35.104] [info]  App starting...
+[2026-01-24 11:26:35.120] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-01-24 11:26:35.715] [info]  Hardware survey for general system resources through 'vulkan' took 563.43ms
+[2026-01-24 11:26:36.130] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-01-24 11:26:36.142] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-01-24 11:26:36.155] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.39
+[2026-01-24 11:26:36.792] [info]  [AppUpdater] Received version info response
+[2026-01-24 11:26:36.814] [info]  [AppUpdater] Current version: 0.3.39 (build: 2), new version: 0.3.39 (build: 2)
+[2026-01-24 11:26:36.829] [info]  No update available: 0.3.39 (build: 2) <= 0.3.39 (build: 2)
+[2026-01-24 11:26:36.842] [info]  AppUpdater state changed to idle
+[2026-01-24 11:28:09.876] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2026-01-25 07:47:38.437] [info]  App starting...
+[2026-01-25 07:47:38.447] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-01-25 07:47:39.267] [info]  Hardware survey for general system resources through 'vulkan' took 803.09ms
+[2026-01-25 07:47:39.678] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-01-25 07:47:39.688] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-01-25 07:47:39.696] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.39
+[2026-01-25 07:47:39.798] [info]  Running in headless mode.
+[2026-01-25 07:47:40.089] [info]  [AppUpdater] Received version info response
+[2026-01-25 07:47:40.117] [info]  [AppUpdater] Current version: 0.3.39 (build: 2), new version: 0.3.39 (build: 2)
+[2026-01-25 07:47:40.130] [info]  No update available: 0.3.39 (build: 2) <= 0.3.39 (build: 2)
+[2026-01-25 07:47:40.143] [info]  AppUpdater state changed to idle
+[2026-01-25 12:23:28.008] [error] (node:7764) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
+(Use `LM Studio --trace-deprecation ...` to show where the warning was created)
+[2026-01-25 14:12:01.658] [error] (node:7764) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+[2026-01-30 08:22:11.832] [info]  App starting...
+[2026-01-30 08:22:11.845] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-01-30 08:22:12.964] [info]  Hardware survey for general system resources through 'vulkan' took 1100.04ms
+[2026-01-30 08:22:13.399] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-01-30 08:22:13.408] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-01-30 08:22:13.417] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.39
+[2026-01-30 08:22:13.517] [info]  Running in headless mode.
+[2026-01-30 08:22:13.833] [info]  [AppUpdater] Received version info response
+[2026-01-30 08:22:13.841] [info]  [AppUpdater] Current version: 0.3.39 (build: 2), new version: 0.4.0 (build: 18)
+[2026-01-30 08:22:13.849] [info]  Update available: 0.4.0 > 0.3.39
+[2026-01-30 08:22:13.859] [info]  AppUpdater state changed to update-available
+[2026-02-01 12:17:04.587] [error] (node:5956) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `LM Studio --trace-warnings ...` to show where the warning was created)
+[2026-02-07 12:39:40.973] [info]  App starting...
+[2026-02-07 12:39:40.987] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-02-07 12:39:42.091] [info]  Hardware survey for general system resources through 'vulkan' took 1076.72ms
+[2026-02-07 12:39:42.530] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-07 12:39:42.541] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-07 12:39:42.550] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.39
+[2026-02-07 12:39:42.644] [info]  Running in headless mode.
+[2026-02-07 12:39:42.886] [info]  [AppUpdater] Received version info response
+[2026-02-07 12:39:42.895] [info]  [AppUpdater] Current version: 0.3.39 (build: 2), new version: 0.4.2 (build: 2)
+[2026-02-07 12:39:42.907] [info]  Update available: 0.4.2 > 0.3.39
+[2026-02-07 12:39:42.918] [info]  AppUpdater state changed to update-available
+[2026-02-11 10:35:34.261] [info]  App starting...
+[2026-02-11 10:35:34.272] [info]  [AppUpdater] Update channel set to 'stable'
+[2026-02-11 10:35:35.181] [info]  Hardware survey for general system resources through 'vulkan' took 887.63ms
+[2026-02-11 10:35:35.627] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-11 10:35:35.634] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-11 10:35:35.640] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.3.39
+[2026-02-11 10:35:35.729] [info]  Running in headless mode.
+[2026-02-11 10:35:35.991] [info]  [AppUpdater] Received version info response
+[2026-02-11 10:35:35.998] [info]  [AppUpdater] Current version: 0.3.39 (build: 2), new version: 0.4.2 (build: 2)
+[2026-02-11 10:35:36.007] [info]  Update available: 0.4.2 > 0.3.39
+[2026-02-11 10:35:36.014] [info]  AppUpdater state changed to update-available
+[2026-02-18 08:53:49.168] [info]  AppUpdater state changed to downloading-update
+[2026-02-18 08:53:49.179] [info]  Checking for update
+[2026-02-18 08:53:49.482] [info]  Found version 0.4.2+2 (url: LM-Studio-0.4.2-2-win32-x64.exe)
+[2026-02-18 08:53:49.489] [info]  Update available.
+[2026-02-18 08:53:49.495] [info]  Downloading update from LM-Studio-0.4.2-2-win32-x64.exe
+[2026-02-18 08:53:49.506] [debug] updater cache dir: C:\Users\kadek\AppData\Local\lm-studio-updater
+[2026-02-18 08:53:49.517] [info]  Cached update sha512 checksum doesn't match the latest available update. New update must be downloaded. Cached: vhYul87adIZBS0oEkyw+MaZvTCK/2TBv+rU9fxQXrVkgtcnktnLLhooL26NNeuigC52CMsA4JqOguSv1ohEowA==, expected: A5Ft5ktYUsyp+z3dA2YMMPpXu5N4Qj5BZGEe1EUH7O5y7RU4d+8vrO/KVN2SuyhQ2YPceXQvK/x0fevYLbXGrA==. Directory for cached update will be cleaned
+[2026-02-18 08:53:49.526] [warn]  disableWebInstaller is set to false, you should set it to true if you do not plan on using a web installer. This will default to true in a future version.
+[2026-02-18 08:53:49.533] [info]  Download block maps (old: "https://updates.lmstudio.ai/LM-Studio-0.4.2-2-win32-x64.exe.blockmap", new: https://updates.lmstudio.ai/LM-Studio-0.4.2-2-win32-x64.exe.blockmap)
+[2026-02-18 08:53:49.686] [error] Cannot download differentially, fallback to full download: Error: Cannot download "https://updates.lmstudio.ai/LM-Studio-0.4.2-2-win32-x64.exe.blockmap", status 404: 
+    at ClientRequest.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:7:133999)
+    at ClientRequest.emit (node:events:519:28)
+    at SimpleURLLoaderWrapper.<anonymous> (node:electron/js2c/browser_init:2:123712)
+    at SimpleURLLoaderWrapper.emit (node:events:519:28)
+[2026-02-18 08:53:50.724] [info]  Download progress: 3.8951937774934606%
+[2026-02-18 08:53:51.740] [info]  Download progress: 7.934743092054093%
+[2026-02-18 08:53:52.743] [info]  Download progress: 12.349597382417663%
+[2026-02-18 08:53:53.753] [info]  Download progress: 16.810292313913862%
+[2026-02-18 08:53:54.756] [info]  Download progress: 20.81414095334421%
+[2026-02-18 08:53:55.756] [info]  Download progress: 24.679300816693303%
+[2026-02-18 08:53:56.762] [info]  Download progress: 28.822407093117825%
+[2026-02-18 08:53:57.764] [info]  Download progress: 33.292779133657355%
+[2026-02-18 08:53:58.771] [info]  Download progress: 37.78207166618212%
+[2026-02-18 08:53:59.786] [info]  Download progress: 41.49989736227853%
+[2026-02-18 08:54:00.790] [info]  Download progress: 45.8780192596399%
+[2026-02-18 08:54:01.793] [info]  Download progress: 50.38203905904223%
+[2026-02-18 08:54:02.794] [info]  Download progress: 55.02431390842436%
+[2026-02-18 08:54:03.794] [info]  Download progress: 59.72929697465686%
+[2026-02-18 08:54:04.797] [info]  Download progress: 64.25380871397168%
+[2026-02-18 08:54:05.798] [info]  Download progress: 68.5599790115408%
+[2026-02-18 08:54:06.802] [info]  Download progress: 73.10335298112572%
+[2026-02-18 08:54:07.809] [info]  Download progress: 77.7879533481616%
+[2026-02-18 08:54:08.814] [info]  Download progress: 82.35068153583319%
+[2026-02-18 08:54:09.830] [info]  Download progress: 87.19637716355689%
+[2026-02-18 08:54:10.830] [info]  Download progress: 91.74481181045238%
+[2026-02-18 08:54:11.838] [info]  Download progress: 96.26566641335768%
+[2026-02-18 08:54:12.660] [info]  Download progress: 100%
+[2026-02-18 08:54:12.665] [info]  New version 0.4.2+2 has been downloaded to C:\Users\kadek\AppData\Local\lm-studio-updater\pending\LM-Studio-0.4.2-2-win32-x64.exe
+[2026-02-18 08:54:12.670] [info]  AppUpdater state changed to update-downloaded
+[2026-02-18 08:54:15.508] [info]  AppUpdater state changed to awaiting-restart
+[2026-02-18 08:54:15.510] [info]  Install on explicit quitAndInstall
+[2026-02-18 08:54:15.512] [info]  Install: isSilent: true, isForceRunAfter: true
+[2026-02-18 08:54:17.505] [info]  Update installer has already been triggered. Quitting application.
+[2026-02-18 08:54:50.871] [info]  Hardware survey for general system resources through 'vulkan' took 693.04ms
+[2026-02-18 08:54:51.348] [info]  App starting...
+[2026-02-18 08:54:51.358] [info]  [AppUpdater] Feed base: https://updates.lmstudio.ai, channel: stable
+[2026-02-18 08:54:51.367] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-18 08:54:51.374] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-18 08:54:51.381] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-18 08:54:51.887] [info]  [AppUpdater] Received version info response
+[2026-02-18 08:54:51.905] [info]  [AppUpdater] Current version: 0.4.2 (build: 2), new version: 0.4.2 (build: 2)
+[2026-02-18 08:54:51.923] [info]  No update available: 0.4.2 (build: 2) <= 0.4.2 (build: 2)
+[2026-02-18 08:54:51.954] [info]  AppUpdater state changed to idle
+[2026-02-18 08:57:02.148] [error] [RuntimeIndexerTarGzExtractionPostDownloadActionExecutor] Failed to delete target directory: Error: EPERM: operation not permitted, unlink 'C:\Users\kadek\.lmstudio\extensions\backends\vendor\win-llama-cuda12-vendor-v2\cudart64_12.dll'
+[2026-02-18 14:30:23.360] [info]  Opening folder: C:\Users\kadek\.lmstudio\models
+[2026-02-18 14:38:22.421] [error] (node:59428) [DEP0147] DeprecationWarning: In future versions of Node.js, fs.rmdir(path, { recursive: true }) will be removed. Use fs.rm(path, { recursive: true }) instead
+(Use `LM Studio --trace-deprecation ...` to show where the warning was created)
+[2026-02-18 14:45:37.893] [error] (node:59428) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+[2026-02-19 09:06:30.870] [info]  Hardware survey for general system resources through 'vulkan' took 931.97ms
+[2026-02-19 09:06:31.305] [info]  App starting...
+[2026-02-19 09:06:31.307] [info]  [AppUpdater] Feed base: https://updates.lmstudio.ai, channel: stable
+[2026-02-19 09:06:31.308] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-19 09:06:31.309] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-19 09:06:31.310] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-19 09:06:31.844] [info]  [AppUpdater] Received version info response
+[2026-02-19 09:06:31.845] [info]  [AppUpdater] Current version: 0.4.2 (build: 2), new version: 0.4.2 (build: 2)
+[2026-02-19 09:06:31.846] [info]  No update available: 0.4.2 (build: 2) <= 0.4.2 (build: 2)
+[2026-02-19 09:06:31.847] [info]  AppUpdater state changed to idle
+[2026-02-19 09:29:15.127] [error] (node:15920) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `LM Studio --trace-warnings ...` to show where the warning was created)
+[2026-02-20 23:56:59.539] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=countTokens] Error in RPC handler: Error: Instance does not exist or is not LLM.
+    at _0x2a528a.getLLMModelOrThrow (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:240:4850)
+    at _0x31d907.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:197:6268)
+    at _0x267e10.<computed>.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:246:14676)
+    at Object.handler (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:371:47724)
+[2026-02-20 23:59:21.670] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=countTokens] Error in RPC handler: Error: Instance does not exist or is not LLM.
+    at _0x2a528a.getLLMModelOrThrow (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:240:4850)
+    at _0x31d907.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:197:6268)
+    at _0x267e10.<computed>.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:246:14676)
+    at Object.handler (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:371:47724)
+[2026-02-21 00:00:29.920] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=countTokens] Error in RPC handler: Error: Instance does not exist or is not LLM.
+    at _0x2a528a.getLLMModelOrThrow (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:240:4850)
+    at _0x31d907.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:197:6268)
+    at _0x267e10.<computed>.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:246:14676)
+    at Object.handler (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:371:47724)
+[2026-02-21 00:02:31.851] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=countTokens] Error in RPC handler: Error: Instance does not exist or is not LLM.
+    at _0x2a528a.getLLMModelOrThrow (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:240:4850)
+    at _0x31d907.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:197:6268)
+    at _0x267e10.<computed>.countTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:246:14676)
+    at Object.handler (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:371:47724)
+[2026-02-21 01:09:22.215] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=predict] Error in channel handler: Error: received prediction-error
+    at _0x3f0862.<computed> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:1307:146618)
+    at _0x139185._0x5bdd69 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:138:2232)
+    at _0x139185.emit (node:events:519:28)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:19998)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:143:4051)
+    at _0x4a639b.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:18948)
+    at _0x4a639b.emit (node:events:519:28)
+    at ForkUtilityProcess.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:745:17887)
+    at ForkUtilityProcess.emit (node:events:519:28)
+    at ForkUtilityProcess.a.emit (node:electron/js2c/browser_init:2:75042)
+- Caused By: Error: Cannot truncate prompt with n_keep (4470) >= n_ctx (4096)
+    at _0x4c1f86.<computed>.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:85:29761)
+    at async _0x3e3b80.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:20148)
+    at async _0x3e3b80.handleMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:9324)
+[2026-02-21 01:24:38.233] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=predict] Error in channel handler: Error: received prediction-error
+    at _0x3f0862.<computed> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:1307:146618)
+    at _0x139185._0x5bdd69 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:138:2232)
+    at _0x139185.emit (node:events:519:28)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:19998)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:143:4051)
+    at _0x4a639b.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:18948)
+    at _0x4a639b.emit (node:events:519:28)
+    at ForkUtilityProcess.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:745:17887)
+    at ForkUtilityProcess.emit (node:events:519:28)
+    at ForkUtilityProcess.a.emit (node:electron/js2c/browser_init:2:75042)
+- Caused By: Error: Cannot truncate prompt with n_keep (4438) >= n_ctx (4096)
+    at _0x4c1f86.<computed>.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:85:29761)
+    at async _0x3e3b80.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:20148)
+    at async _0x3e3b80.handleMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:9324)
+[2026-02-21 01:51:25.080] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=predict] Error in channel handler: Error: Model reloaded.
+    at _0x139185._0x1977d3 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:138:3187)
+    at _0x139185.emit (node:events:531:35)
+    at _0x139185.onChildExit (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:19420)
+    at _0x4a639b.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:18665)
+    at _0x4a639b.emit (node:events:519:28)
+    at ForkUtilityProcess.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:745:17754)
+    at ForkUtilityProcess.emit (node:events:519:28)
+    at ForkUtilityProcess.a.emit (node:electron/js2c/browser_init:2:74657)
+    at UtilityProcessWrapper.callbackTrampoline (node:internal/async_hooks:130:17)
