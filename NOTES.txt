@@ -1,0 +1,7 @@
+NOTED ACTIONABLE ISSUES:
+chunks_filtered=0 - determine if
+	thresholds are too loose
+	or
+	extraction quality is genuinely good after the loader
+chunk quality and agentic feedback loop
+	

@@ -141,13 +141,6 @@ Corpus Material Source Citations
 Massachusetts Institute of Technology. (2009). Logistics and supply chain management (ESD.273J) [Lecture notes]. MIT OpenCourseWare.
 https://ocw.mit.edu/courses/esd-273j-logistics-and-supply-chain-management-fall-2009/
 
-Cornell University, Dyson School of Applied Economics and Management. (n.d.). Competition: Supply chains [Course document].
-https://barrett.dyson.cornell.edu/
-
-DeNunzio, S. (2018). Logistics technology and application (BUSML 7386) [Course syllabus]. The Ohio State University.
-
-Li, P. (2024). Production planning and control (OSCM 3333) [Course syllabus]. University of Texas at El Paso.
-
 Adjemian, M. K., Wilson, W. W., Bullock, D. W., & Lakkakula, P. (2021).
 Recent surges in ocean transportation rates and their effects on selected agricultural markets
 [Presentation slides]. University of Georgia; North Dakota State University.

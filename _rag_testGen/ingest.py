@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import hashlib
+import re
+import sys
+import psycopg
+
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterable, List
-
-import psycopg
 
 from chunking import chunk_text
 from db_pgvector import clear_chunks, ensure_schema, set_meta_if_absent, set_meta, upsert_chunks
@@ -24,6 +27,31 @@ class IngestConfig:
     chunk_chars: int = 1600
     overlap_chars: int = 200
     clear_first: bool = False
+
+
+_WS_RE = re.compile(r"\s+")
+
+
+def _chunk_id(doc_sha256: str, chunk_text: str) -> str:
+    """note: Generates a stable chunk id derived from document identity and normalized chunk text."""
+    norm = _WS_RE.sub(" ", (chunk_text or "").strip())
+    h = hashlib.sha256()
+    h.update((doc_sha256 + "\n" + norm).encode("utf-8"))
+    return h.hexdigest()
+
+
+def _chunk_content_ok(text: str, min_alpha_chars: int = 120, min_alpha_ratio: float = 0.35) -> bool:
+    """note: Returns True if chunk has enough alphabetic content to be useful for generation.
+    Filters out slide-number artifacts, footer-only chunks, chart-label noise, and OCR-corrupted text."""
+    t = (text or "").strip()
+    if not t:
+        return False
+    alpha_chars = sum(1 for c in t if c.isalpha())
+    if alpha_chars < min_alpha_chars:
+        return False
+    if (alpha_chars / len(t)) < min_alpha_ratio:
+        return False
+    return True
 
 
 def iter_domain_files(domain_dir: Path) -> Iterable[Path]:
@@ -64,6 +92,7 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
         embedding_dim = _infer_embedding_dim(cfg.embed_lm_url, cfg.embed_model)
 
     rows_total = 0
+    chunks_filtered_count = 0
 
     with psycopg.connect(cfg.db_dsn) as conn:
         ensure_schema(conn, int(embedding_dim))
@@ -80,11 +109,23 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
         else:
             cleared = 0
 
+        print(f"Ingesting {docs_total} docs from {domain_dir}", file=sys.stderr, flush=True)
+
         pending_texts: List[str] = []
         pending_rows: List[dict[str, Any]] = []
 
         for doc in loaded:
-            chunks = chunk_text(doc.text, chunk_chars=cfg.chunk_chars, overlap_chars=cfg.overlap_chars)
+            print(f"  Processing {doc.path.name} ...", file=sys.stderr, flush=True)
+
+            raw_chunks = chunk_text(doc.text, chunk_chars=cfg.chunk_chars, overlap_chars=cfg.overlap_chars)
+            raw_count = len(raw_chunks)
+            chunks = [ch for ch in raw_chunks if _chunk_content_ok(ch.text)]
+            filtered = raw_count - len(chunks)
+            chunks_filtered_count += filtered
+
+            if filtered:
+                print(f"    Filtered {filtered}/{raw_count} chunks (low content density)", file=sys.stderr, flush=True)
+
             for ch in chunks:
                 pending_texts.append(ch.text)
                 pending_rows.append(
@@ -97,6 +138,7 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
                         "meta": {
                             "source_root": str(domain_dir),
                             "rel_path": str(doc.path.resolve().relative_to(domain_dir)),
+                            "chunk_id": _chunk_id(doc.sha256, ch.text),
                         },
                     }
                 )
@@ -113,6 +155,7 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
                     for r, e in zip(pending_rows, embs):
                         r["embedding"] = e
                     rows_total += upsert_chunks(conn, pending_rows)
+                    print(f"  Embedded {rows_total} chunks so far...", file=sys.stderr, flush=True)
                     pending_texts = []
                     pending_rows = []
 
@@ -127,11 +170,18 @@ def ingest_domain(cfg: IngestConfig) -> dict[str, Any]:
                 r["embedding"] = e
             rows_total += upsert_chunks(conn, pending_rows)
 
+    print(
+        f"Ingest complete: {rows_total} chunks upserted, {chunks_filtered_count} filtered",
+        file=sys.stderr, flush=True,
+    )
+    print("", file=sys.stderr, flush=True)
+
     return {
         "domain_dir": str(domain_dir),
         "docs_loaded": docs_total,
         "files_skipped_or_unsupported": skipped,
         "chunks_cleared_first": int(cleared),
         "chunks_upserted": rows_total,
+        "chunks_filtered": chunks_filtered_count,
         "embedding_dim": int(embedding_dim),
     }

@@ -29,15 +29,13 @@ def build_parser() -> argparse.ArgumentParser:
     ingest_p.add_argument("--batch-size", type=int, default=None)
     ingest_p.add_argument("--chunk-chars", type=int, default=None)
     ingest_p.add_argument("--overlap-chars", type=int, default=None)
-    ingest_p.add_argument("--clear-first", action="store_true")
-    ingest_p.add_argument("--run-id", type=str, default=None)
+    ingest_p.add_argument("--clear-first", action="store_true", help="If set, deletes existing chunks before ingesting.")
 
     gen_p = sub.add_parser("generate", help="Generate test items using existing pgvector chunks (no ingest).")
     gen_p.add_argument("--db-dsn", type=str, default=None)
     gen_p.add_argument("--lm-url", type=str, default=None)
     gen_p.add_argument("--embed-model", type=str, default=None)
-    gen_p.add_argument("--generator-model", type=str, default=None)
-    gen_p.add_argument("--context-model", type=str, default=None)
+    gen_p.add_argument("--sme-model", type=str, default=None)
     gen_p.add_argument("--review-model", type=str, default=None)
     gen_p.add_argument("--n-items", type=int, default=None)
     gen_p.add_argument("--run-id", type=str, default=None)
@@ -47,9 +45,8 @@ def build_parser() -> argparse.ArgumentParser:
     gen_p.add_argument("--sleep-seconds", type=float, default=None)
 
     pipe_p = sub.add_parser("pipeline", help="Orchestrate ingest (if needed) and then generate.")
-    pipe_p.add_argument("--force-ingest", action="store_true")
-    pipe_p.add_argument("--clear-first", action="store_true")
-    pipe_p.add_argument("--ingest-only", action="store_true", help="Ingest and write XLSX with Chunk Preview; skip generation.")
+    pipe_p.add_argument("--force-ingest", action="store_true", help="Force ingestion even if DB already has chunks.")
+    pipe_p.add_argument("--clear-first", action="store_true", help="If set, deletes existing chunks before ingesting.")
     pipe_p.add_argument("--run-id", type=str, default=None)
 
     return p
@@ -69,10 +66,8 @@ def main(argv: list[str] | None = None) -> int:
         cfg = cfg.with_overrides(domain_dir=args.domain_dir)
     if getattr(args, "embed_model", None):
         cfg = cfg.with_overrides(embed_model=args.embed_model)
-    if getattr(args, "generator_model", None):
-        cfg = cfg.with_overrides(generator_model=args.generator_model)
-    if getattr(args, "context_model", None):
-        cfg = cfg.with_overrides(context_model=args.context_model)
+    if getattr(args, "sme_model", None):
+        cfg = cfg.with_overrides(sme_model=args.sme_model)
     if getattr(args, "review_model", None):
         cfg = cfg.with_overrides(review_model=args.review_model)
     if getattr(args, "n_items", None) is not None:
@@ -85,8 +80,6 @@ def main(argv: list[str] | None = None) -> int:
         cfg = cfg.with_overrides(top_k=int(args.top_k))
     if getattr(args, "sleep_seconds", None) is not None:
         cfg = cfg.with_overrides(sleep_seconds=float(args.sleep_seconds))
-    if getattr(args, "ingest_only", False):
-        cfg = cfg.with_overrides(ingest_only=True)
 
     program_root = Path(__file__).resolve().parent
     print("STARTUP")
@@ -96,9 +89,7 @@ def main(argv: list[str] | None = None) -> int:
     print(cfg.startup_diagnostics())
     print("")
 
-    # ------------------------------------------------------------------ ingest
     if args.cmd == "ingest":
-        run_id = getattr(args, "run_id", None) or cfg.run_id or _default_run_id()
         ingest_cfg = IngestConfig(
             domain_dir=cfg.domain_dir,
             db_dsn=cfg.db_dsn,
@@ -116,15 +107,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{k}={v}")
         return 0
 
-    # ---------------------------------------------------------------- generate
     if args.cmd == "generate":
-        run_id = getattr(args, "run_id", None) or cfg.run_id or _default_run_id()
+        run_id = args.run_id or cfg.run_id
         gen_cfg = GenerateConfig(
             db_dsn=cfg.db_dsn,
             lm_url=cfg.lm_url,
             embed_model=cfg.embed_model,
-            generator_model=cfg.generator_model,
-            context_model=cfg.context_model,
+            sme_model=cfg.sme_model,
             review_model=cfg.review_model,
             n_items=cfg.n_items,
             run_id=run_id,
@@ -139,10 +128,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"{k}={v}")
         return 0
 
-    # ---------------------------------------------------------------- pipeline
     if args.cmd == "pipeline":
-        run_id = getattr(args, "run_id", None) or cfg.run_id or _default_run_id()
-        ingest_only = bool(getattr(args, "ingest_only", False)) or bool(cfg.ingest_only)
+        run_id = args.run_id or cfg.run_id
         pipe_cfg = PipelineConfig(
             db_dsn=cfg.db_dsn,
             domain_dir=cfg.domain_dir,
@@ -154,10 +141,8 @@ def main(argv: list[str] | None = None) -> int:
             overlap_chars=cfg.overlap_chars,
             clear_first=bool(args.clear_first),
             force_ingest=bool(args.force_ingest) or bool(cfg.force_ingest),
-            ingest_only=ingest_only,
             n_items=cfg.n_items,
-            generator_model=cfg.generator_model,
-            context_model=cfg.context_model,
+            sme_model=cfg.sme_model,
             review_model=cfg.review_model,
             run_id=run_id,
             prompts_dir=cfg.prompts_dir,

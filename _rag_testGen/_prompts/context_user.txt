@@ -1,0 +1,13 @@
+Rewrite the following retrieved source text according to the Rewrite Policy.
+
+Rewrite Policy:
+- Fix broken line wraps and PDF hyphenation artifacts
+- Remove duplicated headers, page markers, timestamps, and exact repeated lines
+- Normalize whitespace and paragraph breaks
+- Preserve wording, order, and meaning exactly
+- Do NOT paraphrase, summarize, or infer
+
+Return only the rewritten text. No commentary.
+
+Source text:
+{{CONTEXT}}

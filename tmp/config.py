@@ -50,8 +50,7 @@ class ResolvedConfig:
 
     lm_url: str
     embed_model: str
-    generator_model: str
-    context_model: str
+    sme_model: str
     review_model: str
 
     n_items: int
@@ -61,7 +60,6 @@ class ResolvedConfig:
     out_dir: Path
 
     force_ingest: bool
-    ingest_only: bool
 
     embedding_dim: int | None
     batch_size: int
@@ -92,15 +90,13 @@ class ResolvedConfig:
         lines.append(f"db_dsn={_redact_dsn(self.db_dsn)}")
         lines.append(f"lm_url={self.lm_url}")
         lines.append(f"embed_model={self.embed_model}")
-        lines.append(f"generator_model={self.generator_model}")
-        lines.append(f"context_model={self.context_model}")
+        lines.append(f"sme_model={self.sme_model}")
         lines.append(f"review_model={self.review_model}")
         lines.append(f"n_items={self.n_items}")
         lines.append(f"run_id={(self.run_id or '')}")
         lines.append(f"prompts_dir={self.prompts_dir}")
         lines.append(f"out_dir={self.out_dir}")
         lines.append(f"force_ingest={self.force_ingest}")
-        lines.append(f"ingest_only={self.ingest_only}")
         return "\n".join(lines)
 
 
@@ -114,13 +110,8 @@ def load_config_from_env() -> ResolvedConfig:
     lm_url = _env("LM_URL") or "http://localhost:1234"
 
     embed_model = _env("EMBED_MODEL") or ""
-
-    # GENERATOR_MODEL replaces SME_MODEL; SME_MODEL kept as fallback alias for older config.bat files.
-    generator_model = _env("GENERATOR_MODEL") or _env("SME_MODEL") or ""
-
-    # CONTEXT_MODEL replaces CONTEXT_REWRITE_MODEL; defaults to review_model if not set.
-    review_model = _env("REVIEW_MODEL") or generator_model
-    context_model = _env("CONTEXT_MODEL") or review_model
+    sme_model = _env("SME_MODEL") or ""
+    review_model = _env("REVIEW_MODEL") or sme_model
 
     n_items = _env_int("N_ITEMS") or 5
     run_id = _env("RUN_ID")
@@ -129,7 +120,6 @@ def load_config_from_env() -> ResolvedConfig:
     out_dir = Path(_env("OUT_DIR") or (rag_root / "runs")).resolve()
 
     force_ingest = _env_bool("FORCE_INGEST")
-    ingest_only = _env_bool("INGEST_ONLY")
 
     embedding_dim = _env_int("EMBED_DIM")
     batch_size = _env_int("BATCH_SIZE") or 32
@@ -143,8 +133,8 @@ def load_config_from_env() -> ResolvedConfig:
         raise SystemExit("Missing required setting: DB_DSN (env var DB_DSN).")
     if not embed_model.strip():
         raise SystemExit("Missing required setting: EMBED_MODEL (env var EMBED_MODEL).")
-    if not generator_model.strip():
-        raise SystemExit("Missing required setting: GENERATOR_MODEL (env var GENERATOR_MODEL).")
+    if not sme_model.strip():
+        raise SystemExit("Missing required setting: SME_MODEL (env var SME_MODEL).")
 
     return ResolvedConfig(
         rag_root=rag_root,
@@ -152,15 +142,13 @@ def load_config_from_env() -> ResolvedConfig:
         db_dsn=db_dsn,
         lm_url=lm_url,
         embed_model=embed_model,
-        generator_model=generator_model,
-        context_model=context_model,
+        sme_model=sme_model,
         review_model=review_model,
         n_items=int(n_items),
         run_id=run_id,
         prompts_dir=prompts_dir,
         out_dir=out_dir,
         force_ingest=bool(force_ingest),
-        ingest_only=bool(ingest_only),
         embedding_dim=embedding_dim,
         batch_size=int(batch_size),
         chunk_chars=int(chunk_chars),

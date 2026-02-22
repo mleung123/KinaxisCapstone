@@ -128,3 +128,50 @@ PostgreSQL Database directory appears to contain a database; Skipping initializa
 2026-02-21 10:34:11.106 UTC [27] LOG:  checkpoint complete: wrote 71 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=7.022 s, sync=0.014 s, total=7.050 s; sync files=18, longest=0.003 s, average=0.001 s; distance=1142 kB, estimate=1640 kB; lsn=0/2ABD5B8, redo lsn=0/2A88D28
 2026-02-21 10:39:22.637 UTC [27] LOG:  checkpoint starting: time
 2026-02-21 10:39:34.284 UTC [27] LOG:  checkpoint complete: wrote 117 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=11.629 s, sync=0.009 s, total=11.648 s; sync files=20, longest=0.002 s, average=0.001 s; distance=657 kB, estimate=1542 kB; lsn=0/2B2D308, redo lsn=0/2B2D278
+2026-02-21 11:11:14.124 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 11:11:38.319 UTC [27] LOG:  checkpoint complete: wrote 242 buffers (1.5%); 0 WAL file(s) added, 0 removed, 0 recycled; write=24.171 s, sync=0.010 s, total=24.195 s; sync files=24, longest=0.003 s, average=0.001 s; distance=1911 kB, estimate=1911 kB; lsn=0/2D20F40, redo lsn=0/2D0AEF8
+2026-02-21 11:16:33.080 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 11:16:37.312 UTC [27] LOG:  checkpoint complete: wrote 43 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.215 s, sync=0.007 s, total=4.232 s; sync files=11, longest=0.003 s, average=0.001 s; distance=182 kB, estimate=1738 kB; lsn=0/2D38AC8, redo lsn=0/2D38A38
+2026-02-21 11:21:51.970 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 11:21:52.585 UTC [27] LOG:  checkpoint complete: wrote 6 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.603 s, sync=0.004 s, total=0.616 s; sync files=2, longest=0.004 s, average=0.002 s; distance=2 kB, estimate=1564 kB; lsn=0/2D39460, redo lsn=0/2D39408
+2026-02-21 18:07:13.116 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 18:07:44.574 UTC [27] LOG:  checkpoint complete: wrote 293 buffers (1.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=31.424 s, sync=0.011 s, total=31.458 s; sync files=24, longest=0.003 s, average=0.001 s; distance=2069 kB, estimate=2069 kB; lsn=0/2F3EAF0, redo lsn=0/2F3EA60
+2026-02-21 18:33:58.215 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 18:33:58.432 UTC [27] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.203 s, sync=0.004 s, total=0.217 s; sync files=1, longest=0.004 s, average=0.004 s; distance=2 kB, estimate=1862 kB; lsn=0/2F3F630, redo lsn=0/2F3F5D8
+2026-02-21 21:57:57.935 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 21:58:10.767 UTC [6283] LOG:  unexpected EOF on client connection with an open transaction
+2026-02-21 21:58:25.327 UTC [27] LOG:  checkpoint complete: wrote 251 buffers (1.5%); 0 WAL file(s) added, 0 removed, 1 recycled; write=27.368 s, sync=0.007 s, total=27.392 s; sync files=23, longest=0.003 s, average=0.001 s; distance=1995 kB, estimate=1995 kB; lsn=0/3132500, redo lsn=0/3132470
+2026-02-21 22:03:51.680 UTC [6299] LOG:  unexpected EOF on client connection with an open transaction
+2026-02-21 22:08:40.716 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 22:08:43.641 UTC [27] LOG:  checkpoint complete: wrote 30 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.909 s, sync=0.007 s, total=2.925 s; sync files=18, longest=0.003 s, average=0.001 s; distance=1043 kB, estimate=1900 kB; lsn=0/32372E0, redo lsn=0/3237250
+2026-02-21 22:14:03.550 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 22:14:18.811 UTC [27] LOG:  checkpoint complete: wrote 153 buffers (0.9%); 0 WAL file(s) added, 0 removed, 0 recycled; write=15.242 s, sync=0.009 s, total=15.262 s; sync files=20, longest=0.004 s, average=0.001 s; distance=945 kB, estimate=1804 kB; lsn=0/3323968, redo lsn=0/33238D8
+2026-02-21 22:14:56.124 UTC [6313] LOG:  unexpected EOF on client connection with an open transaction
+2026-02-21 22:19:26.668 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 22:19:50.345 UTC [27] LOG:  checkpoint complete: wrote 237 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=23.659 s, sync=0.007 s, total=23.677 s; sync files=23, longest=0.003 s, average=0.001 s; distance=1606 kB, estimate=1785 kB; lsn=0/34B5540, redo lsn=0/34B54B0
+2026-02-21 22:57:08.475 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 22:57:25.250 UTC [27] LOG:  checkpoint complete: wrote 168 buffers (1.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=16.754 s, sync=0.009 s, total=16.775 s; sync files=23, longest=0.003 s, average=0.001 s; distance=1557 kB, estimate=1762 kB; lsn=0/363AC08, redo lsn=0/363AB78
+2026-02-21 23:02:31.341 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 23:02:54.134 UTC [27] LOG:  checkpoint complete: wrote 228 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=22.776 s, sync=0.007 s, total=22.794 s; sync files=22, longest=0.003 s, average=0.001 s; distance=1534 kB, estimate=1739 kB; lsn=0/37BA6A0, redo lsn=0/37BA610
+2026-02-21 23:13:17.784 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 23:13:18.199 UTC [27] LOG:  checkpoint complete: wrote 4 buffers (0.0%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.402 s, sync=0.004 s, total=0.415 s; sync files=2, longest=0.004 s, average=0.002 s; distance=8 kB, estimate=1566 kB; lsn=0/37BC7A8, redo lsn=0/37BC750
+2026-02-21 23:34:52.092 UTC [27] LOG:  checkpoint starting: time
+2026-02-21 23:34:56.328 UTC [27] LOG:  checkpoint complete: wrote 43 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.214 s, sync=0.013 s, total=4.237 s; sync files=21, longest=0.004 s, average=0.001 s; distance=823 kB, estimate=1492 kB; lsn=0/3894DA0, redo lsn=0/388A588
+2026-02-22 00:01:51.078 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:02:04.337 UTC [27] LOG:  checkpoint complete: wrote 133 buffers (0.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=13.240 s, sync=0.010 s, total=13.260 s; sync files=21, longest=0.005 s, average=0.001 s; distance=899 kB, estimate=1432 kB; lsn=0/396B508, redo lsn=0/396B478
+2026-02-22 00:07:15.595 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:07:25.338 UTC [27] LOG:  checkpoint complete: wrote 98 buffers (0.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=9.722 s, sync=0.008 s, total=9.743 s; sync files=6, longest=0.003 s, average=0.002 s; distance=621 kB, estimate=1351 kB; lsn=0/3A6A7B0, redo lsn=0/3A06A08
+2026-02-22 00:12:39.470 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:13:02.853 UTC [27] LOG:  checkpoint complete: wrote 234 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=23.360 s, sync=0.014 s, total=23.384 s; sync files=21, longest=0.004 s, average=0.001 s; distance=936 kB, estimate=1310 kB; lsn=0/3AF0CA8, redo lsn=0/3AF0C18
+2026-02-22 00:23:27.990 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:23:47.662 UTC [27] LOG:  checkpoint complete: wrote 197 buffers (1.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=19.644 s, sync=0.015 s, total=19.672 s; sync files=22, longest=0.005 s, average=0.001 s; distance=2011 kB, estimate=2011 kB; lsn=0/3D4DBF0, redo lsn=0/3CE7890
+2026-02-22 00:28:51.890 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:29:14.881 UTC [27] LOG:  checkpoint complete: wrote 230 buffers (1.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=22.964 s, sync=0.018 s, total=22.992 s; sync files=22, longest=0.006 s, average=0.001 s; distance=612 kB, estimate=1871 kB; lsn=0/3D80C18, redo lsn=0/3D80B88
+2026-02-22 00:37:30.436 UTC [6589] LOG:  unexpected EOF on client connection with an open transaction
+2026-02-22 00:45:04.852 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:45:22.924 UTC [27] LOG:  checkpoint complete: wrote 179 buffers (1.1%); 0 WAL file(s) added, 0 removed, 0 recycled; write=18.054 s, sync=0.006 s, total=18.073 s; sync files=17, longest=0.003 s, average=0.001 s; distance=1120 kB, estimate=1796 kB; lsn=0/3ECC358, redo lsn=0/3E98F20
+2026-02-22 00:55:54.470 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 00:56:06.423 UTC [27] LOG:  checkpoint complete: wrote 120 buffers (0.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=11.936 s, sync=0.006 s, total=11.953 s; sync files=14, longest=0.003 s, average=0.001 s; distance=205 kB, estimate=1637 kB; lsn=0/3ECC538, redo lsn=0/3ECC4A8
+2026-02-22 00:57:29.178 UTC [6631] LOG:  unexpected EOF on client connection with an open transaction
+2026-02-22 01:01:18.992 UTC [27] LOG:  checkpoint starting: time
+2026-02-22 01:01:31.246 UTC [27] LOG:  checkpoint complete: wrote 123 buffers (0.8%); 0 WAL file(s) added, 0 removed, 0 recycled; write=12.236 s, sync=0.008 s, total=12.254 s; sync files=20, longest=0.004 s, average=0.001 s; distance=1044 kB, estimate=1577 kB; lsn=0/3FD1858, redo lsn=0/3FD17C8
