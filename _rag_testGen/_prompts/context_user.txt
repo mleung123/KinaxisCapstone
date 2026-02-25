@@ -1,13 +1,6 @@
-Rewrite the following retrieved source text according to the Rewrite Policy.
+Extract the core knowledge from the following learning material as structured prose paragraphs.
 
-Rewrite Policy:
-- Fix broken line wraps and PDF hyphenation artifacts
-- Remove duplicated headers, page markers, timestamps, and exact repeated lines
-- Normalize whitespace and paragraph breaks
-- Preserve wording, order, and meaning exactly
-- Do NOT paraphrase, summarize, or infer
+Each paragraph should capture one coherent concept or principle. Separate paragraphs with a blank line. Write only the knowledge paragraphs — no headers, no lists, no commentary.
 
-Return only the rewritten text. No commentary.
-
-Source text:
-{{CONTEXT}}
+Learning material:
+{{DOCUMENT}}

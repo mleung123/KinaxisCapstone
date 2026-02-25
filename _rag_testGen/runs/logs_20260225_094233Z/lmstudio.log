@@ -533,3 +533,69 @@
     at ForkUtilityProcess.emit (node:events:519:28)
     at ForkUtilityProcess.a.emit (node:electron/js2c/browser_init:2:74657)
     at UtilityProcessWrapper.callbackTrampoline (node:internal/async_hooks:130:17)
+[2026-02-24 17:24:32.875] [info]  Hardware survey for general system resources through 'vulkan' took 948.44ms
+[2026-02-24 17:24:33.299] [info]  App starting...
+[2026-02-24 17:24:33.307] [info]  [AppUpdater] Feed base: https://updates.lmstudio.ai, channel: stable
+[2026-02-24 17:24:33.316] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-24 17:24:33.323] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-24 17:24:33.331] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-24 17:24:33.477] [info]  Running in headless mode.
+[2026-02-24 17:24:45.710] [error] Error fetching updates: fetch failed
+[2026-02-24 17:24:45.713] [info]  AppUpdater state changed to failed-to-check-for-updates
+[2026-02-24 17:24:45.715] [info]  AppUpdater state changed to idle
+[2026-02-24 17:24:46.735] [error] [BackendDownloadProvider] Failed to refresh backends master list TypeError: fetch failed
+    at node:internal/deps/undici/undici:14900:13
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:69:3)
+    at process.processImmediate (node:internal/timers:453:9)
+    at async _0xbf4a8e.getBackendsMasterList (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:200:15794)
+    at async _0x52b9e1.<computed>.refreshBackendsMasterList (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:343:6658)
+    at async C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:340:8182
+    at async Promise.all (index 14)
+    at async _0x4cb0b7.<computed>.runDelayedInits (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:174:4144)
+[2026-02-24 17:24:46.737] [error] Failed to fetch staff picks Error: Network connection failed
+    at _0x39d680.<computed>.fetchWithRetry (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:617:9288)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at runNextTicks (node:internal/process/task_queues:69:3)
+    at process.processImmediate (node:internal/timers:453:9)
+    at async _0x39d680.<computed>.handleFetchUnauthenticatedWithoutParsing (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:617:12287)
+    at async _0x39d680.<computed>.handleFetchUnauthenticated (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:617:12444)
+    at async _0xbf4a8e.getStaffPicks (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:200:17453)
+    at async _0x4e186d.refreshFeed (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:1118:8850)
+    at async C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:1118:8347
+    at async Promise.all (index 12)
+[2026-02-24 17:24:46.738] [error] [BackendDownloadProvider] Failed to refresh backends master list TypeError: fetch failed
+    at node:internal/deps/undici/undici:14900:13
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async _0xbf4a8e.getBackendsMasterList (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:200:15794)
+    at async _0x52b9e1.<computed>.refreshBackendsMasterList (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:343:6658)
+[2026-02-24 17:25:00.713] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-24 17:25:00.714] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-24 17:25:00.714] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-24 17:25:10.030] [error] Error fetching updates: fetch failed
+[2026-02-24 17:25:10.031] [info]  AppUpdater state changed to failed-to-check-for-updates
+[2026-02-24 17:25:10.032] [info]  AppUpdater state changed to idle
+[2026-02-24 22:02:47.748] [error] [LMSInternal][LMSAuthenticator][Client=LM Studio][Endpoint=predict] Error in channel handler: Error: received prediction-error
+    at _0x3f0862.<computed> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:1307:146618)
+    at _0x139185._0x5bdd69 (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:138:2232)
+    at _0x139185.emit (node:events:519:28)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:19998)
+    at _0x139185.onChildMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:143:4051)
+    at _0x4a639b.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:123:18948)
+    at _0x4a639b.emit (node:events:519:28)
+    at ForkUtilityProcess.<anonymous> (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\main\index.js:745:17887)
+    at ForkUtilityProcess.emit (node:events:519:28)
+    at ForkUtilityProcess.a.emit (node:electron/js2c/browser_init:2:75042)
+- Caused By: Error: request (24621 tokens) exceeds the available context size (4096 tokens), try increasing it
+    at _0x4c1f86.<computed>.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:85:29761)
+    at async _0x3e3b80.predictTokens (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:20148)
+    at async _0x3e3b80.handleMessage (C:\Users\kadek\AppData\Local\Programs\LM Studio\resources\app\.webpack\lib\llmworker.js:124:9324)
+[2026-02-24 22:42:45.280] [error] (node:19380) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `LM Studio --trace-warnings ...` to show where the warning was created)
+[2026-02-24 23:25:10.037] [info]  [AppUpdater] Checking for updates... (current state: idle)
+[2026-02-24 23:25:10.046] [info]  AppUpdater state changed to checking-for-updates-periodic
+[2026-02-24 23:25:10.054] [info]  [AppUpdater] Fetching version info from https://versions-prod.lmstudio.ai/update/win32/x86/0.4.2
+[2026-02-24 23:25:10.314] [info]  [AppUpdater] Received version info response
+[2026-02-24 23:25:10.322] [info]  [AppUpdater] Current version: 0.4.2 (build: 2), new version: 0.4.4 (build: 1)
+[2026-02-24 23:25:10.329] [info]  Update available: 0.4.4 > 0.4.2
+[2026-02-24 23:25:10.337] [info]  AppUpdater state changed to update-available
