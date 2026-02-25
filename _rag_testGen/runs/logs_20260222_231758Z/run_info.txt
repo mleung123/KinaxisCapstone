@@ -1,0 +1,5 @@
+RUN_ID=20260222_231758Z
+RAG_ROOT=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen
+DOMAIN_DIR=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/example1
+RUN_START=20260222_231759Z
+RUN_END=20260222_231811Z

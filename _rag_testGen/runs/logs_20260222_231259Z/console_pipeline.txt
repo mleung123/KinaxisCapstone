@@ -1,0 +1,32 @@
+STARTUP
+python_exe=/Users/mickl/anaconda3/bin/python
+program_root=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen
+cmd=pipeline
+rag_root=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen
+domain_dir=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/example1
+db_dsn=postgresql://postgres:***@localhost:5435/kinaxis_ragtestdb
+lm_url=http://localhost:1234
+embed_model=text-embedding-nomic-embed-text-v1.5@q8_0
+generator_model=qwen2.5-7b-instruct-uncensored
+context_model=qwen2.5-7b-instruct-uncensored
+review_model=qwen2.5-7b-instruct-uncensored
+n_items=5
+run_id=
+prompts_dir=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen/_prompts
+out_dir=/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen/runs
+force_ingest=False
+ingest_only=True
+
+Traceback (most recent call last):
+  File "/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen/cli.py", line 178, in <module>
+    raise SystemExit(main())
+  File "/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen/cli.py", line 168, in main
+    summary = run_pipeline(pipe_cfg)
+  File "/Users/mickl/Documents/Programming/Capstone/KinaxisCapstone/_rag_testGen/pipeline.py", line 758, in run_pipeline
+    with psycopg.connect(cfg.db_dsn) as conn:
+  File "/Users/mickl/anaconda3/lib/python3.10/site-packages/psycopg/connection.py", line 130, in connect
+    raise new_ex.with_traceback(None)
+psycopg.OperationalError: connection failed: database "kinaxis_ragtestdb" does not exist
+Multiple connection attempts failed. All failures were:
+- host: 'localhost', port: '5435', hostaddr: '::1': connection failed: database "kinaxis_ragtestdb" does not exist
+- host: 'localhost', port: '5435', hostaddr: '127.0.0.1': connection failed: database "kinaxis_ragtestdb" does not exist

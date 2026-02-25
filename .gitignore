@@ -1,0 +1,8 @@
+config.env
+*.pyc
+*.env
+*.env
+_rag_testGen/.DS_Store
+ExperimentationTL/.DS_Store
+_rag_testGen/runs/.DS_Store
+.DS_Store
