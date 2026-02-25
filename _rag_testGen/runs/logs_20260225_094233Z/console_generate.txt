@@ -1,0 +1,2 @@
+[interactive run — stdout not captured when checkpoints enabled]
+returncode=0

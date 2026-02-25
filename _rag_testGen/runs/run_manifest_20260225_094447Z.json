@@ -1,26 +1,18 @@
 {
-  "created_at": "2026-02-22T19:15:02Z",
+  "created_at": "2026-02-25T09:44:47Z",
   "config": {
+    "mode": "rag",
     "db_dsn_redacted": "postgresql://postgres:***@localhost:5435/kinaxis_ragtestdb",
     "lm_url": "http://localhost:1234",
     "embed_model": "text-embedding-nomic-embed-text-v1.5@q8_0",
     "generator_model": "qwen2.5-7b-instruct-uncensored",
-    "context_model": "qwen2.5-7b-instruct-uncensored",
     "review_model": "qwen2.5-7b-instruct-uncensored",
     "n_items": 1,
-    "run_id": "20260222_191415Z",
+    "run_id": "20260225_094447Z",
     "prompts_dir": "C:\\Users\\kadek\\Documents\\GitHub\\KinaxisCapstone\\_rag_testGen\\_prompts",
     "out_dir": "C:\\Users\\kadek\\Documents\\GitHub\\KinaxisCapstone\\_rag_testGen\\runs",
     "top_k": 6,
     "sleep_seconds": 0.0,
-    "condition_label": "baseline"
-  },
-  "prompt_files": {
-    "generator_system": "generator_system.txt",
-    "generator_user": "generator_user.txt",
-    "reviewer_system": "reviewer_system.txt",
-    "reviewer_user": "reviewer_user.txt",
-    "context_system": "context_system.txt",
-    "context_user": "context_user.txt"
+    "condition_label": "rag"
   }
 }
